@@ -1,0 +1,2994 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="408 数据结构 C 代码完整复习：考点、实现、复杂度、易错点与综合练习。"><title>408 数据结构 · C 代码完整复习</title>
+<style>
+:root{--paper:#f7f7f2;--ink:#202e32;--muted:#627074;--line:#dce3dd;--teal:#0d625b;--pale:#e8f1e9;--orange:#bd5e28;--white:#fff;--code:#15272c;--side:258px}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:28px}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Microsoft YaHei UI","Microsoft YaHei","Segoe UI",sans-serif;font-size:15px;line-height:1.9}button,input{font:inherit}a{color:var(--teal);text-underline-offset:4px}a:hover{color:#ac4f20}button{cursor:pointer}aside{position:fixed;inset:0 auto 0 0;width:var(--side);padding:30px 22px;background:#edf0e8;border-right:1px solid var(--line);overflow:auto}.brand{font:700 38px/1.2 Georgia,serif;letter-spacing:-2px;color:var(--teal)}.brand small{display:block;font:600 12px/1.8 "Microsoft YaHei",sans-serif;letter-spacing:3px;margin-top:8px;color:var(--muted)}.searchbox{margin:25px 0 8px}.searchbox label{display:block;font-size:12px;font-weight:700;margin-bottom:5px}.searchbox input{width:100%;padding:10px 12px;border:1px solid #b8c9bd;border-radius:6px;background:#fff;font-size:13px;outline:none}.searchbox input:focus{border-color:var(--teal);box-shadow:0 0 0 2px #0d625b22}#search-status{min-height:23px;font-size:11px;color:var(--muted)}nav{margin:15px 0}.nav-link{display:flex;gap:10px;align-items:baseline;padding:8px 8px;border-radius:5px;text-decoration:none;font-size:13px;color:#384c4c;line-height:1.6}.nav-link span{font-family:Consolas,monospace;font-size:12px;color:#8a9891}.nav-link:hover,.nav-link.active{background:#dce9dd;color:var(--teal)}.side-tools{margin-top:25px;padding-top:18px;border-top:1px solid #cdd8cc;display:grid;gap:9px}.side-tools button,.side-tools a{border:1px solid #b7c9bc;border-radius:5px;padding:7px 9px;background:transparent;text-decoration:none;text-align:center;font-size:12px;color:var(--teal)}.side-note{font-size:11px;color:var(--muted);line-height:1.8;margin-top:18px}main{margin-left:var(--side);padding:48px 6vw 90px;max-width:1540px}.hero{padding:0 0 38px;border-bottom:1px solid #b6cbbd;margin-bottom:45px}.eyebrow{font-size:12px;letter-spacing:3px;font-weight:700;color:var(--teal)}h1{font-size:44px;line-height:1.35;letter-spacing:-1.5px;margin:20px 0 18px;font-weight:750}h1 em{font-style:normal;color:var(--teal)}.deck{font-size:17px;color:var(--muted);max-width:720px}.pills{display:flex;flex-wrap:wrap;gap:8px;margin:24px 0}.pills span{font-size:12px;padding:4px 12px;border:1px solid #c4d5c7;border-radius:30px;color:var(--teal)}.stats{display:flex;gap:32px;margin-top:30px}.stats strong{font:700 27px/1.2 Georgia,serif;color:var(--teal);display:block}.stats small{font-size:11px;color:var(--muted)}.hero-note{padding:15px 18px;background:var(--pale);border-left:3px solid var(--teal);font-size:13px;margin-top:24px}.chapter{margin-bottom:52px}.chapter-heading{border-top:2px solid var(--teal);padding-top:18px;margin-bottom:28px}.chapter-heading>span{font-size:11px;letter-spacing:2px;color:var(--teal);font-weight:700}h2{font-size:29px;line-height:1.4;margin:7px 0 17px}.chapter-subnav{display:flex;flex-wrap:wrap;gap:6px 16px}.chapter-subnav a{font-size:11px;text-decoration:none;color:var(--muted)}.chapter-subnav a:hover{text-decoration:underline}.topic{margin:28px 0 35px;scroll-margin-top:30px}.topic h3{font-size:19px;line-height:1.55;margin:0 0 15px;color:var(--ink)}p{margin:12px 0 16px}strong{font-weight:700;color:#174b48}ul,ol{padding-left:25px;margin:14px 0 20px}li{padding-left:3px;margin:5px 0}code{font-family:Consolas,"Cascadia Code","Microsoft YaHei",monospace;font-size:.88em;background:#e8ede8;color:#20554e;padding:2px 5px;border-radius:3px;overflow-wrap:anywhere}.table-wrap{width:100%;overflow:auto;margin:20px 0 25px;border:1px solid var(--line);border-radius:7px;background:#fff}table{border-collapse:collapse;width:100%;font-size:12px;line-height:1.7}th,td{padding:12px 14px;text-align:left;vertical-align:top;border-bottom:1px solid #e6ebe4;min-width:82px}th{font-weight:700;background:#e8eee5;color:#22544b;white-space:nowrap}tr:last-child td{border-bottom:0}tbody tr:nth-child(even){background:#fafbf8}.codebox{margin:22px 0 25px;background:var(--code);border-radius:8px;overflow:hidden;box-shadow:0 3px 10px #15272c0b}.codebar{display:flex;align-items:center;justify-content:space-between;padding:8px 17px;background:#1d3439;color:#9bbcb6;font-size:11px;letter-spacing:.4px}.copy{border:1px solid #4e6c6c;color:#cce4de;border-radius:4px;background:transparent;padding:3px 9px;font-size:11px}.copy:hover{background:#37534f}.codebox pre{margin:0;padding:19px 21px 23px;overflow:auto;tab-size:4}.codebox code{padding:0;background:transparent;color:#dbe8e4;font:12.5px/1.8 Consolas,"Cascadia Code","Microsoft YaHei",monospace;white-space:pre;overflow-wrap:normal}.comment{color:#8aa29c}.keyword{color:#e5b987}.string{color:#b6dca5}.number{color:#e0cc87}.preproc{color:#80c7c3}.answer{border:1px solid #c8d8ca;background:#f0f5ed;border-radius:6px;margin:17px 0;padding:0 16px}.answer summary{cursor:pointer;font-size:13px;font-weight:700;color:var(--teal);padding:12px 0}.answer[open] summary{border-bottom:1px solid #d4dfd2;margin-bottom:14px}.answer .codebox{margin-left:0;margin-right:0}footer{font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding:22px 0}#no-results{padding:40px 0;color:var(--muted)}[hidden]{display:none!important}.top-link{position:fixed;right:22px;bottom:18px;border:1px solid #bed0c1;background:#f7f7f2e8;border-radius:30px;padding:8px 14px;text-decoration:none;font-size:12px}
+@media(min-width:1600px){main{padding-left:90px;padding-right:90px}}@media(max-width:1000px){:root{--side:218px}aside{padding:24px 16px}main{padding:35px 4vw}h1{font-size:36px}.nav-link{font-size:12px}}@media(max-width:760px){aside{position:static;width:100%;padding:18px 22px;border-right:0;border-bottom:1px solid var(--line)}.brand{font-size:29px}.brand small{display:inline;margin-left:17px;font-size:10px}.searchbox{margin:16px 0 4px}nav{display:flex;flex-wrap:wrap;gap:4px;margin:10px 0}.nav-link{padding:5px 7px;font-size:11px}.side-tools{display:flex;margin:12px 0 0;padding:12px 0 0}.side-tools a,.side-tools button{flex:1}.side-note{display:none}main{margin:0;padding:30px 22px 60px}h1{font-size:34px}.deck{font-size:15px}.stats{gap:23px}.topic h3{font-size:17px}.codebox pre{padding:16px;font-size:11px}h2{font-size:25px}}
+@media print{body{font-size:10pt;line-height:1.6;background:white}aside,.copy,.top-link,.chapter-subnav{display:none!important}main{margin:0;padding:0;max-width:none}h1{font-size:27pt}.hero{margin-bottom:20px;padding-bottom:20px}.chapter{break-before:page}.chapter-heading{margin-bottom:15px}h2{font-size:20pt}h3{font-size:13pt;break-after:avoid}p,li{orphans:3;widows:3}.table-wrap{overflow:visible}table{font-size:8pt}th,td{padding:6px 8px}tr{break-inside:avoid}.codebox{background:#f3f5f1!important;color:#111;box-shadow:none;border:1px solid #ddd;overflow:visible}.codebar{background:#e6ede6;color:#333}.codebox pre{overflow:visible;white-space:pre-wrap;padding:12px}.codebox code{font-size:8pt;color:#111;white-space:pre-wrap;overflow-wrap:anywhere}.keyword,.preproc{color:#235a56}.comment{color:#65736a}.string,.number{color:#664c22}.answer{background:white}.hero-note{background:#f1f4ef}.stats{gap:25px}a{color:#225b54;text-decoration:none}footer{font-size:8pt}}
+
+/* Reading layout: Visual Studio-like C formatting and editor colors. */
+body{font-family:"Microsoft YaHei UI","Microsoft YaHei","PingFang SC",-apple-system,"Segoe UI",sans-serif}
+.codebox{background:#1e1e1e}.codebar{background:#252526;color:#b8b8b8}
+.codebox code{font:14px/1.75 Consolas,"Cascadia Code",Menlo,"PingFang SC",monospace;color:#d4d4d4}
+.keyword,.preproc{color:#569cd6}.comment{color:#79a85d}.string{color:#ce9178}.number{color:#b5cea8}
+.copy{min-height:32px;border-color:#666;color:#ddd}.copy:hover{background:#3b3b3b}
+.side-tools{gap:8px}.searchbox input{font-size:16px}
+@media(max-width:900px){aside{position:static;width:100%;padding:18px 22px;border-right:0;border-bottom:1px solid var(--line)}.brand{font-size:29px}.brand small{display:inline;margin-left:17px;font-size:10px}.searchbox{margin:16px 0 4px}nav{display:flex;flex-wrap:wrap;gap:4px;margin:10px 0}.nav-link{padding:7px;font-size:12px}.side-tools{display:flex;flex-wrap:wrap;margin:12px 0 0;padding:12px 0 0}.side-tools a,.side-tools button{flex:1;min-width:95px;padding:10px 8px}.side-note{display:none}main{margin:0;padding:30px 22px 60px}.codebox code{font-size:13.5px}.copy{min-height:38px}.hero{margin-bottom:30px}}
+@media print{.codebox{background:#f3f5f1!important}.codebox code{font-size:8pt;color:#111}.keyword,.preproc{color:#235a56}.comment{color:#65736a}.string,.number{color:#664c22}}
+</style></head><body id="top"><aside><div class="brand">408<small>数据结构 · C 代码笔记</small></div><div class="searchbox"><label for="search">查找考点</label><input id="search" type="search" placeholder="例：链表 / KMP / dijkstra" autocomplete="off"></div><div id="search-status" aria-live="polite">67 个小节，可搜索正文与代码</div><nav aria-label="章节目录"><a href="#ch00" class="nav-link"><span>00</span>阅读说明与代码约定</a><a href="#ch01" class="nav-link"><span>01</span>线性表</a><a href="#ch02" class="nav-link"><span>02</span>栈、队列、数组与压缩存储</a><a href="#ch03" class="nav-link"><span>03</span>串与模式匹配</a><a href="#ch04" class="nav-link"><span>04</span>树与二叉树</a><a href="#ch05" class="nav-link"><span>05</span>图：存储、遍历与算法</a><a href="#ch06" class="nav-link"><span>06</span>查找</a><a href="#ch07" class="nav-link"><span>07</span>排序</a><a href="#ch08" class="nav-link"><span>08</span>综合算法题：从条件推导代码</a><a href="#ch09" class="nav-link"><span>09</span>复习清单与验证说明</a></nav><div class="side-tools"><button id="print" type="button">打印 / 保存 PDF</button><a href="ds408-notes.ipynb" download>下载 Notebook</a><a href="ds408-c-sources.zip" download>下载 C 源码</a></div><div class="side-note">标准 C11 · Visual Studio 风格<br>代码用于理解与手写练习。<br>无需配置 Jupyter 内核。<br>整理日期：2026-10-12</div></aside><main><header class="hero"><div class="eyebrow">EXAM 408 / DATA STRUCTURES</div><h1>数据结构<br><em>C 代码完整复习</em></h1><p class="deck">从存储结构到综合算法题，把考点、代码和推导放在一起。先理解不变量，再记住写法。</p><div class="pills"><span>考点地图</span><span>核心实现</span><span>复杂度与边界</span><span>原创练习与答案</span></div><div class="stats"><div><strong>7</strong><small>大专题 + 数组补充</small></div><div><strong>12</strong><small>道综合算法练习</small></div><div><strong>67</strong><small>个可检索小节</small></div></div><div class="hero-note"><strong>Visual Studio 常见代码格式：</strong>4 个空格缩进，大括号另起一行，每条语句独立成行。<br>所有算法均以 C 编写。此版可直接用浏览器阅读，Notebook 同样不需要 C 内核。<br>另附可编译源码与自测；高级结构的完整实现范围见 09.3。</div></header><div id="no-results" hidden>没有匹配的小节。可以换一个函数名或更短的关键词。</div><section class="chapter" id="ch00" aria-labelledby="title-ch00"><div class="chapter-heading"><span>CHAPTER 00</span><h2 id="title-ch00">阅读说明与代码约定</h2><div class="chapter-subnav"><a href="#s00-1">00.1 如何使用这份材料</a><a href="#s00-2">00.2 统一约定</a><a href="#s00-3">00.3 复杂度与答题表达</a><a href="#s00-4">00.4 C 语言最常见的扣分点</a></div></div><article class="topic" id="s00-1"><h3>00.1 如何使用这份材料</h3><p>这是一份按 408 常见数据结构知识体系组织的原创复习材料，包含你要求的线性表、栈与队列、串、树与二叉树、查找、排序，以及补充的图、数组与压缩存储。未指定备考年份，因此不将它标注为某年官方考试大纲，也不把“复习优先级”解释为命题概率。</p><p>Notebook 以 <strong>Markdown 文本单元中的 C 代码块</strong>呈现，专门用于阅读和做笔记；不需要 C 内核，也不要用 Python 内核执行代码块。HTML 版内容相同，适合浏览器阅读、搜索和打印。想运行时，可使用附带的 C 源码包：每章一个独立程序，有完整头文件、函数与自测入口。</p><p>每章依次阅读：<strong>考点地图 → 核心实现 → 过程例题 → 易错点 → 自测与答案</strong>。标记含义：</p><div class="table-wrap"><table><thead><tr><th scope="col">标记</th><th scope="col">复习要求</th></tr></thead><tbody><tr><td>写</td><td>看懂后合上材料，能写出结构和核心函数</td></tr><tr><td>推</td><td>能画图、追踪数组或指针变化、计算代价</td></tr><tr><td>扩</td><td>综合题迁移、补充实现或进阶理解</td></tr></tbody></table></div></article><article class="topic" id="s00-2"><h3>00.2 统一约定</h3><ul><li>C 代码参照 Visual Studio Community 常见排版：4 个空格缩进，大括号独占一行，分支与循环使用花括号，每条语句独立一行。</li><li>使用 <strong>标准 C11</strong>，不使用 C++ 引用、模板、STL 或 <code>new/delete</code>。</li><li>数组、串、图顶点均从 <strong>0</strong> 编号；线性表插入位置也用 0 基下标。题目若按第 1 个元素编号，先减 1。</li><li>单链表默认<strong>带头结点</strong>，头结点不存有效数据；普通二叉树不带头结点。</li><li>空二叉树高度为 0，叶结点高度为 1；树高按结点层数计算。</li><li><code>bool</code> 表示操作成功与否；查找返回下标或指针；失败为 <code>-1</code> 或 <code>NULL</code>。输出参数必须指向有效对象。</li><li><code>CAP=256</code>、<code>MAXV=64</code> 是教学示例容量。调用者保证不超过容量；部分关键操作会额外检查。图权值、路径和、Huffman 权和均假定在类型可表示范围内。</li><li><code>INF=INT_MAX/4</code> 表示无边或不可达；合法有限路径值必须小于 <code>INF</code>。不把权值 0 当作无边。</li><li>使用 <code>xmalloc</code>：分配失败打印错误并结束程序，使教材代码集中表达算法；考试中应说明内存申请成功的假设。</li><li>每段代码可能依赖同章前面的类型与函数。源码包已按依赖顺序合并，不能把任意片段当作独立完整程序。</li><li>未特别检查的参数，如非负长度、合法顶点/叶子下标、有效输出指针与输出容量，由调用者保证。</li></ul><p>各章共享头文件中的关键定义如下，源码包另提供完整 <code>common.h</code>。</p><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-1" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-1"><span class="comment">/* 公共约定节选；不是需要单独运行的程序。 */</span>
+<span class="preproc">#include &lt;stdbool.h&gt;</span>
+<span class="preproc">#include &lt;stdio.h&gt;</span>
+<span class="preproc">#include &lt;stdlib.h&gt;</span>
+<span class="preproc">#include &lt;string.h&gt;</span>
+<span class="preproc">#include &lt;limits.h&gt;</span>
+<span class="preproc">#define CAP 256</span>
+<span class="preproc">#define MAXV 64</span>
+<span class="preproc">#define INF (INT_MAX / 4)</span></code></pre></div></article><article class="topic" id="s00-3"><h3>00.3 复杂度与答题表达</h3><p>时间复杂度计算随输入规模增长的基本操作次数。顺序语句取主导项，嵌套循环应分析<strong>实际循环范围</strong>；递归还要计算调用栈。</p><div class="table-wrap"><table><thead><tr><th scope="col">代码模式</th><th scope="col">时间</th><th scope="col">辅助空间</th><th scope="col">说明</th></tr></thead><tbody><tr><td>单次扫描长度 n 的表</td><td>O(n)</td><td>O(1)</td><td>输入数组不计入辅助空间</td></tr><tr><td>i 每次乘 2，直到达到 n</td><td>O(log n)</td><td>O(1)</td><td>每次翻倍</td></tr><tr><td>i=0..n-1，j=0..i</td><td>O(n²)</td><td>O(1)</td><td>1+2+…+n</td></tr><tr><td>T(n)=2T(n/2)+O(n)</td><td>O(n log n)</td><td>视实现而定</td><td>归并排序额外数组 O(n)</td></tr><tr><td>T(n)=T(n-1)+O(1)</td><td>O(n)</td><td>O(n)</td><td>退化树递归</td></tr><tr><td>T(n)=T(n-1)+O(n)</td><td>O(n²)</td><td>O(n)</td><td>最差快速排序</td></tr></tbody></table></div><p>写算法题时按四步组织：①说明数据结构和前提；②说明思路与关键不变量；③给代码；④给时间、辅助空间和边界情况。不能只贴模板而不解释为什么满足题意。</p></article><article class="topic" id="s00-4"><h3>00.4 C 语言最常见的扣分点</h3><p><code>Node *p</code> 是指针；<code>p-&gt;next</code> 访问所指结点字段。函数需要修改调用者的根指针时，返回新根，或用 <code>Node **root</code>。本笔记统一用“返回新根”的风格实现 BST/AVL。</p><p><code>sizeof p</code> 是指针大小，申请结点用 <code>sizeof *p</code>；结构体赋值会复制字段，指针字段仍指向相同对象。删除时先保存后继再 <code>free</code>；释放后不再读取结点。比较写 <code>==</code>，赋值写 <code>=</code>；数组合法区间 <code>[0,n)</code>，闭区间代码另行说明。</p></article></section><section class="chapter" id="ch01" aria-labelledby="title-ch01"><div class="chapter-heading"><span>CHAPTER 01</span><h2 id="title-ch01">线性表</h2><div class="chapter-subnav"><a href="#s01-1">01.1 考点地图与存储结构选择</a><a href="#s01-2">01.2 顺序表：插入、删除、稳定压缩</a><a href="#s01-3">01.3 链表：先保留链接，再改变链接</a><a href="#s01-4">01.4 快慢指针与公共结点</a><a href="#s01-5">01.5 双链表与循环链表的指针规则</a><a href="#s01-6">01.6 过程例题与易错点</a><a href="#s01-7">01.7 自测题</a><a href="#s01-8">01.8 参考答案</a></div></div><article class="topic" id="s01-1"><h3>01.1 考点地图与存储结构选择</h3><div class="table-wrap"><table><thead><tr><th scope="col">内容</th><th scope="col">要达到的能力</th><th scope="col">代价/关键前提</th><th scope="col">标记</th></tr></thead><tbody><tr><td>顺序表</td><td>插入、删除、扫描、区间删除、去重</td><td>随机访问 O(1)，中间插删 O(n)</td><td>写</td></tr><tr><td>单链表</td><td>建表、定位、插删、逆置、归并</td><td>定位 O(n)，已知前驱后插删 O(1)</td><td>写</td></tr><tr><td>双链表、循环链表</td><td>画出指针更新及边界</td><td>空表的首尾关系需统一</td><td>写/推</td></tr><tr><td>快慢指针</td><td>中点、倒数第 k、判环与环入口</td><td>避免提前访问空指针</td><td>写</td></tr><tr><td>综合应用</td><td>公共结点、主元素、最小缺失正整数</td><td>比较值与比较地址的区别</td><td>写/扩</td></tr></tbody></table></div><p>顺序表适合按下标访问；链表适合频繁改变链接。链表不具备按序号 O(1) 随机访问。静态链表用数组下标模拟指针，插删本质仍是修改链接域，需维护空闲链。</p></article><article class="topic" id="s01-2"><h3>01.2 顺序表：插入、删除、稳定压缩</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-2" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-2"><span class="keyword">typedef</span> <span class="keyword">struct</span>
+{
+    <span class="keyword">int</span> data[CAP];
+    <span class="keyword">int</span> n;
+} SeqList;
+
+<span class="keyword">bool</span> seq_insert(SeqList *L, <span class="keyword">int</span> pos, <span class="keyword">int</span> x)
+{
+    <span class="keyword">if</span> (pos &lt; <span class="number">0</span> || pos &gt; L-&gt;n || L-&gt;n == CAP)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    <span class="keyword">for</span> (<span class="keyword">int</span> j = L-&gt;n; j &gt; pos; --j)
+    {
+        L-&gt;data[j] = L-&gt;data[j - <span class="number">1</span>];
+    }
+    L-&gt;data[pos] = x;
+    ++L-&gt;n;
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+
+<span class="keyword">bool</span> seq_erase(SeqList *L, <span class="keyword">int</span> pos, <span class="keyword">int</span> *out)
+{
+    <span class="keyword">if</span> (pos &lt; <span class="number">0</span> || pos &gt;= L-&gt;n)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    *out = L-&gt;data[pos];
+    <span class="keyword">for</span> (<span class="keyword">int</span> j = pos; j + <span class="number">1</span> &lt; L-&gt;n; ++j)
+    {
+        L-&gt;data[j] = L-&gt;data[j + <span class="number">1</span>];
+    }
+    --L-&gt;n;
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+
+<span class="comment">/* 删除所有 [lo,hi] 内的元素，保持剩余元素相对顺序。 */</span>
+<span class="keyword">bool</span> seq_remove_range(SeqList *L, <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)
+{
+    <span class="keyword">if</span> (lo &gt; hi)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    <span class="keyword">int</span> k = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; L-&gt;n; ++i)
+    {
+        <span class="keyword">if</span> (L-&gt;data[i] &lt; lo || L-&gt;data[i] &gt; hi)
+        {
+            L-&gt;data[k++] = L-&gt;data[i];
+        }
+    }
+    L-&gt;n = k;
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+
+<span class="comment">/* 前提：非降序。重复值保留第一个。返回新长度。 */</span>
+<span class="keyword">int</span> unique_sorted(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)
+{
+    <span class="keyword">if</span> (n == <span class="number">0</span>)
+    {
+        <span class="keyword">return</span> <span class="number">0</span>;
+    }
+    <span class="keyword">int</span> k = <span class="number">1</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i)
+    {
+        <span class="keyword">if</span> (a[i] != a[k - <span class="number">1</span>])
+        {
+            a[k++] = a[i];
+        }
+    }
+    <span class="keyword">return</span> k;
+}</code></pre></div><p>压缩不变量：处理 <code>a[i]</code> 前，<code>[0,k)</code> 已保存前面所有应保留的元素；始终有 <code>k≤i</code>，因此写入不会破坏尚未读取的元素。两种压缩均 O(n) 时间、O(1) 辅助空间。逐个删除并反复移动会退化到 O(n²)。</p></article><article class="topic" id="s01-3"><h3>01.3 链表：先保留链接，再改变链接</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-3" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-3"><span class="keyword">typedef</span> <span class="keyword">struct</span> Node
+{
+    <span class="keyword">int</span> data;
+    <span class="keyword">struct</span> Node *next;
+} Node;
+
+Node *node_new(<span class="keyword">int</span> x)
+{
+    Node *p = xmalloc(<span class="keyword">sizeof</span> *p);
+    p-&gt;data = x;
+    p-&gt;next = <span class="keyword">NULL</span>;
+    <span class="keyword">return</span> p;
+}
+
+Node *list_build(<span class="keyword">const</span> <span class="keyword">int</span> a[], <span class="keyword">int</span> n)
+{
+    Node *head = node_new(<span class="number">0</span>), *tail = head;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)
+    {
+        tail-&gt;next = node_new(a[i]);
+        tail = tail-&gt;next;
+    }
+    <span class="keyword">return</span> head;
+}
+
+<span class="keyword">void</span> list_destroy(Node *head)
+{
+    <span class="keyword">while</span> (head)
+    {
+        Node *q = head-&gt;next;
+        free(head);
+        head = q;
+    }
+}
+
+<span class="keyword">bool</span> list_insert(Node *head, <span class="keyword">int</span> pos, <span class="keyword">int</span> x)
+{
+    <span class="keyword">if</span> (pos &lt; <span class="number">0</span>)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    Node *pre = head;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; pos &amp;&amp; pre; ++i)
+    {
+        pre = pre-&gt;next;
+    }
+    <span class="keyword">if</span> (!pre)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    Node *p = node_new(x);
+    p-&gt;next = pre-&gt;next;
+    pre-&gt;next = p;
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+
+<span class="keyword">bool</span> list_erase(Node *head, <span class="keyword">int</span> pos, <span class="keyword">int</span> *out)
+{
+    <span class="keyword">if</span> (pos &lt; <span class="number">0</span>)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    Node *pre = head;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; pos &amp;&amp; pre; ++i)
+    {
+        pre = pre-&gt;next;
+    }
+    <span class="keyword">if</span> (!pre || !pre-&gt;next)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    Node *p = pre-&gt;next;
+    *out = p-&gt;data;
+    pre-&gt;next = p-&gt;next;
+    free(p);
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+
+<span class="keyword">void</span> list_reverse(Node *head)
+{
+    Node *p = head-&gt;next;
+    head-&gt;next = <span class="keyword">NULL</span>;
+    <span class="keyword">while</span> (p)
+    {
+        Node *q = p-&gt;next; <span class="comment">/* 必须先保存原后继。 */</span>
+        p-&gt;next = head-&gt;next;
+        head-&gt;next = p;
+        p = q;
+    }
+}
+
+<span class="keyword">void</span> list_remove_value(Node *head, <span class="keyword">int</span> x)
+{
+    Node *pre = head;
+    <span class="keyword">while</span> (pre-&gt;next)
+    {
+        Node *p = pre-&gt;next;
+        <span class="keyword">if</span> (p-&gt;data == x)
+        {
+            pre-&gt;next = p-&gt;next;
+            free(p);
+        }
+        <span class="keyword">else</span>
+        {
+            pre = p; <span class="comment">/* 删除后不移动 pre，继续检查新后继。 */</span>
+        }
+    }
+}
+
+<span class="comment">/* 合并两个升序表，复用结点；消耗 B，释放 B 的头结点。
+   A、B 是不同头结点，且有效结点互不共享；返回 A，调用后不得再访问 B。 */</span>
+Node *list_merge(Node *A, Node *B)
+{
+    Node *p = A-&gt;next, *q = B-&gt;next, *tail = A;
+    <span class="keyword">while</span> (p &amp;&amp; q)
+    {
+        <span class="keyword">if</span> (p-&gt;data &lt;= q-&gt;data)
+        {
+            tail-&gt;next = p;
+            p = p-&gt;next;
+        }
+        <span class="keyword">else</span>
+        {
+            tail-&gt;next = q;
+            q = q-&gt;next;
+        }
+        tail = tail-&gt;next;
+    }
+    tail-&gt;next = p ? p : q;
+    free(B);
+    <span class="keyword">return</span> A;
+}</code></pre></div><p>逆置和删除 O(n)/O(1)，归并 O(m+n)/O(1)。插删函数含定位时为 O(n)；不能因为指针赋值只有两三句就称整个函数 O(1)。头插建表会逆序，尾插保持输入顺序。</p></article><article class="topic" id="s01-4"><h3>01.4 快慢指针与公共结点</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-4" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-4"><span class="comment">/* k 从 1 起；无环表。先让 fast 从首个有效结点走 k 步。 */</span>
+Node *kth_from_end(Node *head, <span class="keyword">int</span> k)
+{
+    <span class="keyword">if</span> (k &lt;= <span class="number">0</span>)
+    {
+        <span class="keyword">return</span> <span class="keyword">NULL</span>;
+    }
+    Node *fast = head-&gt;next, *slow = head-&gt;next;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; ++i)
+    {
+        <span class="keyword">if</span> (!fast)
+        {
+            <span class="keyword">return</span> <span class="keyword">NULL</span>;
+        }
+        fast = fast-&gt;next;
+    }
+    <span class="keyword">while</span> (fast)
+    {
+        fast = fast-&gt;next;
+        slow = slow-&gt;next;
+    }
+    <span class="keyword">return</span> slow;
+}
+
+<span class="comment">/* 偶数长度返回靠后的中点；无环表。 */</span>
+Node *list_middle(Node *head)
+{
+    Node *slow = head-&gt;next, *fast = head-&gt;next;
+    <span class="keyword">while</span> (fast &amp;&amp; fast-&gt;next)
+    {
+        slow = slow-&gt;next;
+        fast = fast-&gt;next-&gt;next;
+    }
+    <span class="keyword">return</span> slow;
+}
+
+<span class="comment">/* 入参是首个有效结点，不是头结点。 */</span>
+Node *cycle_entry(Node *first)
+{
+    Node *slow = first, *fast = first;
+    <span class="keyword">while</span> (fast &amp;&amp; fast-&gt;next)
+    {
+        slow = slow-&gt;next;
+        fast = fast-&gt;next-&gt;next;
+        <span class="keyword">if</span> (slow == fast)
+        {
+            Node *p = first;
+            <span class="keyword">while</span> (p != slow)
+            {
+                p = p-&gt;next;
+                slow = slow-&gt;next;
+            }
+            <span class="keyword">return</span> p;
+        }
+    }
+    <span class="keyword">return</span> <span class="keyword">NULL</span>;
+}
+
+<span class="comment">/* 两个无环链表的首个公共结点，比较地址；O(m+n)/O(1)。 */</span>
+Node *first_common(Node *a, Node *b)
+{
+    Node *p = a, *q = b;
+    <span class="keyword">while</span> (p != q)
+    {
+        p = p ? p-&gt;next : b;
+        q = q ? q-&gt;next : a;
+    }
+    <span class="keyword">return</span> p;
+}
+
+<span class="comment">/* 主元素：出现次数严格超过 n/2；候选必须二次验证。 */</span>
+<span class="keyword">bool</span> majority(<span class="keyword">const</span> <span class="keyword">int</span> a[], <span class="keyword">int</span> n, <span class="keyword">int</span> *out)
+{
+    <span class="keyword">int</span> candidate = <span class="number">0</span>, votes = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)
+    {
+        <span class="keyword">if</span> (votes == <span class="number">0</span>)
+        {
+            candidate = a[i];
+            votes = <span class="number">1</span>;
+        }
+        <span class="keyword">else</span>
+        {
+            votes += a[i] == candidate ? <span class="number">1</span> : -<span class="number">1</span>;
+        }
+    }
+    <span class="keyword">int</span> count = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)
+    {
+        count += a[i] == candidate;
+    }
+    <span class="keyword">if</span> (count &lt;= n / <span class="number">2</span>)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    *out = candidate;
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}</code></pre></div><p>判环相遇后为什么从起点重新走？设起点到入口长度为 a，入口到相遇点为 b，环长为 L，则快慢路程差是 L 的整数倍，从而 <code>a+b</code> 是 L 的整数倍。一个从起点、一个从相遇点同速前进，会在入口相遇。</p><p>主元素抵消法是“不同元素两两抵消”；存在主元素时它必为最终候选，<strong>没有主元素时也可能留下候选</strong>。验证不能省略。</p></article><article class="topic" id="s01-5"><h3>01.5 双链表与循环链表的指针规则</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-5" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-5"><span class="keyword">typedef</span> <span class="keyword">struct</span> DNode
+{
+    <span class="keyword">int</span> data;
+    <span class="keyword">struct</span> DNode *prev, *next;
+} DNode;
+
+<span class="comment">/* 循环双链表，带头结点 H；空表时 H-&gt;next=H-&gt;prev=H。 */</span>
+<span class="keyword">void</span> dlist_insert_after(DNode *p, DNode *s)
+{
+    s-&gt;next = p-&gt;next;
+    s-&gt;prev = p;
+    p-&gt;next-&gt;prev = s;
+    p-&gt;next = s;
+}
+
+<span class="comment">/* p 是有效结点，不能是头结点。 */</span>
+<span class="keyword">void</span> dlist_erase(DNode *p)
+{
+    p-&gt;prev-&gt;next = p-&gt;next;
+    p-&gt;next-&gt;prev = p-&gt;prev;
+    free(p);
+}</code></pre></div><p>单循环链表带尾指针时，头结点为 <code>rear-&gt;next</code>；删除唯一有效结点后必须把尾指针恢复为头结点。循环链表遍历以“再次到达头结点”为终止条件，不能等待 <code>NULL</code>。</p></article><article class="topic" id="s01-6"><h3>01.6 过程例题与易错点</h3><p><strong>例：</strong>对 <code>[2,5,3,5,7]</code> 删除所有 5。读指针 i 依次扫描，写指针 k 依次形成 <code>[2]→[2,3]→[2,3,7]</code>，新长度为 3，数组后部残留值无须清零。</p><p><strong>例：</strong><code>1→2→3→4→5</code> 倒数第 2 个。fast 先走两步指向 3；随后同步移动，fast 变 NULL 时 slow 指向 4。</p><p>易错：忽略空表；第 pos 个与下标 pos 混淆；逆置时覆盖原 next；删除连续目标时误跳过；归并共享链导致环；两个共享尾部的链表分别销毁导致二次释放。</p></article><article class="topic" id="s01-7"><h3>01.7 自测题</h3><ol><li>写函数对无序顺序表删除所有 x，保持剩余顺序，要求 O(n)/O(1)。</li><li>把两个升序链表归并为降序表，复用结点且 O(1) 辅助空间，如何改写？</li><li>长度为 n 的数组中，找最小缺失正整数，要求 O(n) 时间，允许 O(n) 辅助空间。</li><li>不知道前驱，只知道待删除结点 p，能否总在 O(1) 时间删除它？</li></ol></article><article class="topic" id="s01-8"><h3>01.8 参考答案</h3><details class="answer"><summary>查看思路与参考实现</summary><ol><li>使用 <code>k=0</code>，扫描 i，<code>a[i]!=x</code> 时写 <code>a[k++]=a[i]</code>，最后 <code>n=k</code>。不变量与区间删除相同。</li><li>每次取两个表当前较小结点，采用头插法放入结果；剩余结点也逐个头插，不能直接连接剩余升序链。</li><li>长度 n 的答案在 <code>[1,n+1]</code>。申请 n+1 个布尔标记，遇 <code>1≤a[i]≤n</code> 时标记，最后找第一个未出现的 1..n，否则返回 n+1。负数和大于 n 的数忽略。</li><li>不能。非尾结点可复制后继数据并删除后继，但改变了结点身份，也不适用于尾结点；若题目强调结点身份或外部引用，此技巧不等价。</li></ol></details></article></section><section class="chapter" id="ch02" aria-labelledby="title-ch02"><div class="chapter-heading"><span>CHAPTER 02</span><h2 id="title-ch02">栈、队列、数组与压缩存储</h2><div class="chapter-subnav"><a href="#s02-1">02.1 考点地图</a><a href="#s02-2">02.2 顺序栈、共享栈与循环队列</a><a href="#s02-3">02.3 链栈与链队列</a><a href="#s02-4">02.4 括号匹配与两个栈模拟队列</a><a href="#s02-5">02.5 多维数组与特殊矩阵</a><a href="#s02-6">02.6 例题、自测与答案</a></div></div><article class="topic" id="s02-1"><h3>02.1 考点地图</h3><div class="table-wrap"><table><thead><tr><th scope="col">内容</th><th scope="col">必须掌握</th><th scope="col">标记</th></tr></thead><tbody><tr><td>顺序栈、链栈</td><td>空满判定、入栈出栈、头指针变化</td><td>写</td></tr><tr><td>共享栈</td><td>两栈相向增长，top1+1=top2 为满</td><td>写/推</td></tr><tr><td>循环队列</td><td>front/rear 含义、空满与长度公式</td><td>写</td></tr><tr><td>链队列</td><td>头结点、删除最后一个结点后的 rear</td><td>写</td></tr><tr><td>应用</td><td>括号、表达式、递归消除、层序/BFS</td><td>写/推</td></tr><tr><td>数组、矩阵</td><td>行/列优先地址，压缩下标，稀疏三元组</td><td>写/推</td></tr></tbody></table></div><p>栈后进先出，队列先进先出。对于入栈序列 1..n 的合法出栈序列，可用模拟栈验证；元素只能按给定顺序入栈。</p></article><article class="topic" id="s02-2"><h3>02.2 顺序栈、共享栈与循环队列</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-6" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-6"><span class="keyword">typedef</span> <span class="keyword">struct</span>
+{
+    <span class="keyword">int</span> a[CAP];
+    <span class="keyword">int</span> top;
+} Stack;
+
+<span class="keyword">void</span> stack_init(Stack *s)
+{
+    s-&gt;top = -<span class="number">1</span>;
+}
+
+<span class="keyword">bool</span> push(Stack *s, <span class="keyword">int</span> x)
+{
+    <span class="keyword">if</span> (s-&gt;top == CAP - <span class="number">1</span>)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    s-&gt;a[++s-&gt;top] = x;
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+
+<span class="keyword">bool</span> pop(Stack *s, <span class="keyword">int</span> *x)
+{
+    <span class="keyword">if</span> (s-&gt;top == -<span class="number">1</span>)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    *x = s-&gt;a[s-&gt;top--];
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+
+<span class="keyword">typedef</span> <span class="keyword">struct</span>
+{
+    <span class="keyword">int</span> a[CAP];
+    <span class="keyword">int</span> top1, top2;
+} SharedStack;
+
+<span class="keyword">void</span> shared_init(SharedStack *s)
+{
+    s-&gt;top1 = -<span class="number">1</span>;
+    s-&gt;top2 = CAP;
+}
+
+<span class="keyword">bool</span> shared_push(SharedStack *s, <span class="keyword">int</span> which, <span class="keyword">int</span> x)
+{
+    <span class="keyword">if</span> ((which != <span class="number">1</span> &amp;&amp; which != <span class="number">2</span>) || s-&gt;top1 + <span class="number">1</span> == s-&gt;top2)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    <span class="keyword">if</span> (which == <span class="number">1</span>)
+    {
+        s-&gt;a[++s-&gt;top1] = x;
+    }
+    <span class="keyword">else</span>
+    {
+        s-&gt;a[--s-&gt;top2] = x;
+    }
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+
+<span class="keyword">bool</span> shared_pop(SharedStack *s, <span class="keyword">int</span> which, <span class="keyword">int</span> *x)
+{
+    <span class="keyword">if</span> (which == <span class="number">1</span> &amp;&amp; s-&gt;top1 &gt;= <span class="number">0</span>)
+    {
+        *x = s-&gt;a[s-&gt;top1--];
+        <span class="keyword">return</span> <span class="keyword">true</span>;
+    }
+    <span class="keyword">if</span> (which == <span class="number">2</span> &amp;&amp; s-&gt;top2 &lt; CAP)
+    {
+        *x = s-&gt;a[s-&gt;top2++];
+        <span class="keyword">return</span> <span class="keyword">true</span>;
+    }
+    <span class="keyword">return</span> <span class="keyword">false</span>;
+}
+
+<span class="comment">/* front 指向队头，rear 指向下一个入队位置，牺牲一个单元。 */</span>
+<span class="keyword">typedef</span> <span class="keyword">struct</span>
+{
+    <span class="keyword">int</span> a[CAP];
+    <span class="keyword">int</span> front, rear;
+} Queue;
+
+<span class="keyword">void</span> queue_init(Queue *q)
+{
+    q-&gt;front = q-&gt;rear = <span class="number">0</span>;
+}
+
+<span class="keyword">int</span> queue_size(<span class="keyword">const</span> Queue *q)
+{
+    <span class="keyword">return</span> (q-&gt;rear - q-&gt;front + CAP) % CAP;
+}
+
+<span class="keyword">bool</span> enqueue(Queue *q, <span class="keyword">int</span> x)
+{
+    <span class="keyword">if</span> ((q-&gt;rear + <span class="number">1</span>) % CAP == q-&gt;front)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    q-&gt;a[q-&gt;rear] = x;
+    q-&gt;rear = (q-&gt;rear + <span class="number">1</span>) % CAP;
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+
+<span class="keyword">bool</span> dequeue(Queue *q, <span class="keyword">int</span> *x)
+{
+    <span class="keyword">if</span> (q-&gt;front == q-&gt;rear)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    *x = q-&gt;a[q-&gt;front];
+    q-&gt;front = (q-&gt;front + <span class="number">1</span>) % CAP;
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}</code></pre></div><p>本循环队列最多存 <code>CAP-1</code> 个元素。若使用 count 或 tag 区分空满，可存满 CAP 个，但公式需要整体改变，不能混用。</p></article><article class="topic" id="s02-3"><h3>02.3 链栈与链队列</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-7" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-7"><span class="keyword">typedef</span> <span class="keyword">struct</span> Cell
+{
+    <span class="keyword">int</span> value;
+    <span class="keyword">struct</span> Cell *next;
+} Cell;
+
+<span class="comment">/* 链栈不带头结点，top=NULL 表示空。 */</span>
+<span class="keyword">void</span> linked_push(Cell **top, <span class="keyword">int</span> x)
+{
+    Cell *p = xmalloc(<span class="keyword">sizeof</span> *p);
+    p-&gt;value = x;
+    p-&gt;next = *top;
+    *top = p;
+}
+
+<span class="keyword">bool</span> linked_pop(Cell **top, <span class="keyword">int</span> *x)
+{
+    <span class="keyword">if</span> (!*top)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    Cell *p = *top;
+    *x = p-&gt;value;
+    *top = p-&gt;next;
+    free(p);
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+
+<span class="keyword">typedef</span> <span class="keyword">struct</span>
+{
+    Cell *front, *rear;
+} LinkedQueue;
+
+<span class="keyword">void</span> lq_init(LinkedQueue *q)
+{
+    q-&gt;front = q-&gt;rear = xmalloc(<span class="keyword">sizeof</span> *q-&gt;front);
+    q-&gt;front-&gt;next = <span class="keyword">NULL</span>;
+}
+
+<span class="keyword">void</span> lq_enqueue(LinkedQueue *q, <span class="keyword">int</span> x)
+{
+    Cell *p = xmalloc(<span class="keyword">sizeof</span> *p);
+    p-&gt;value = x;
+    p-&gt;next = <span class="keyword">NULL</span>;
+    q-&gt;rear-&gt;next = p;
+    q-&gt;rear = p;
+}
+
+<span class="keyword">bool</span> lq_dequeue(LinkedQueue *q, <span class="keyword">int</span> *x)
+{
+    Cell *p = q-&gt;front-&gt;next;
+    <span class="keyword">if</span> (!p)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    *x = p-&gt;value;
+    q-&gt;front-&gt;next = p-&gt;next;
+    <span class="keyword">if</span> (q-&gt;rear == p)
+    {
+        q-&gt;rear = q-&gt;front;
+    }
+    free(p);
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+
+<span class="keyword">void</span> lq_destroy(LinkedQueue *q)
+{
+    <span class="keyword">int</span> x;
+    <span class="keyword">while</span> (lq_dequeue(q, &amp;x))
+    {
+    }
+    free(q-&gt;front);
+    q-&gt;front = q-&gt;rear = <span class="keyword">NULL</span>;
+}</code></pre></div></article><article class="topic" id="s02-4"><h3>02.4 括号匹配与两个栈模拟队列</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-8" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-8"><span class="keyword">bool</span> brackets_ok(<span class="keyword">const</span> <span class="keyword">char</span> *s)
+{
+    Stack st;
+    stack_init(&amp;st);
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; s[i]; ++i)
+    {
+        <span class="keyword">char</span> c = s[i];
+        <span class="keyword">if</span> (c == <span class="string">'('</span> || c == <span class="string">'['</span> || c == <span class="string">'{'</span>)
+        {
+            <span class="keyword">if</span> (!push(&amp;st, c))
+            {
+                <span class="keyword">return</span> <span class="keyword">false</span>;
+            }
+        }
+        <span class="keyword">else</span> <span class="keyword">if</span> (c == <span class="string">')'</span> || c == <span class="string">']'</span> || c == <span class="string">'}'</span>)
+        {
+            <span class="keyword">int</span> left;
+            <span class="keyword">if</span> (!pop(&amp;st, &amp;left))
+            {
+                <span class="keyword">return</span> <span class="keyword">false</span>;
+            }
+            <span class="keyword">if</span> (!((left == <span class="string">'('</span> &amp;&amp; c == <span class="string">')'</span>) || (left == <span class="string">'['</span> &amp;&amp; c == <span class="string">']'</span>) ||
+                  (left == <span class="string">'{'</span> &amp;&amp; c == <span class="string">'}'</span>)))
+            {
+                <span class="keyword">return</span> <span class="keyword">false</span>;
+            }
+        }
+    }
+    <span class="keyword">return</span> st.top == -<span class="number">1</span>;
+}
+
+<span class="comment">/* 本例总容量限制为 CAP，避免 out 尚有数据时 in 被塞满。 */</span>
+<span class="keyword">typedef</span> <span class="keyword">struct</span>
+{
+    Stack in, out;
+    <span class="keyword">int</span> count;
+} TwoStackQueue;
+
+<span class="keyword">void</span> tsq_init(TwoStackQueue *q)
+{
+    stack_init(&amp;q-&gt;in);
+    stack_init(&amp;q-&gt;out);
+    q-&gt;count = <span class="number">0</span>;
+}
+
+<span class="keyword">bool</span> tsq_enqueue(TwoStackQueue *q, <span class="keyword">int</span> x)
+{
+    <span class="keyword">if</span> (q-&gt;count == CAP)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    <span class="keyword">if</span> (!push(&amp;q-&gt;in, x))
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    ++q-&gt;count;
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+
+<span class="keyword">bool</span> tsq_dequeue(TwoStackQueue *q, <span class="keyword">int</span> *x)
+{
+    <span class="keyword">if</span> (q-&gt;count == <span class="number">0</span>)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    <span class="keyword">if</span> (q-&gt;out.top == -<span class="number">1</span>)
+    {
+        <span class="keyword">int</span> t;
+        <span class="keyword">while</span> (pop(&amp;q-&gt;in, &amp;t))
+        {
+            push(&amp;q-&gt;out, t);
+        }
+    }
+    pop(&amp;q-&gt;out, x);
+    --q-&gt;count;
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}</code></pre></div><p>两个栈模拟队列只在 out 为空时搬运。每个元素最多进入 in、搬到 out、离开 out 各一次，所以单次出队最差 O(n)，<strong>一串操作的均摊代价</strong>为每次 O(1)。不能写“每次出队最坏 O(1)”。</p><p>表达式处理：中缀转后缀时，操作数直接输出，左括号入栈，右括号弹到左括号，运算符按优先级和结合性弹栈。后缀求值时先弹出的是右操作数，后弹出的是左操作数。此处只讨论普通二元运算；一元负号需要额外词法/语法规则。</p><p>下面给出后缀求值完整函数，依赖公共头文件的 <code>&lt;ctype.h&gt;</code> 和 <code>&lt;errno.h&gt;</code>。输入 token 以空白分隔，支持带符号十进制整数及 <code>+ - * /</code>；使用 C 的整数除法，非整数实数表达式不在本例范围。</p><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-9" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-9"><span class="keyword">bool</span> postfix_eval(<span class="keyword">const</span> <span class="keyword">char</span> *text, <span class="keyword">int</span> *answer)
+{
+    Stack st;
+    stack_init(&amp;st);
+    <span class="keyword">const</span> <span class="keyword">char</span> *p = text;
+    <span class="keyword">while</span> (*p)
+    {
+        <span class="keyword">while</span> (isspace((<span class="keyword">unsigned</span> <span class="keyword">char</span>)*p))
+        {
+            ++p;
+        }
+        <span class="keyword">if</span> (!*p)
+        {
+            <span class="keyword">break</span>;
+        }
+        <span class="keyword">bool</span> op = (*p == <span class="string">'+'</span> || *p == <span class="string">'-'</span> || *p == <span class="string">'*'</span> || *p == <span class="string">'/'</span>) &amp;&amp;
+                  (p[<span class="number">1</span>] == <span class="string">'\0'</span> || isspace((<span class="keyword">unsigned</span> <span class="keyword">char</span>)p[<span class="number">1</span>]));
+        <span class="keyword">if</span> (op)
+        {
+            <span class="keyword">int</span> right, left;
+            <span class="keyword">if</span> (!pop(&amp;st, &amp;right) || !pop(&amp;st, &amp;left))
+            {
+                <span class="keyword">return</span> <span class="keyword">false</span>;
+            }
+            <span class="keyword">long</span> <span class="keyword">long</span> value;
+            <span class="keyword">if</span> (*p == <span class="string">'+'</span>)
+            {
+                value = (<span class="keyword">long</span> <span class="keyword">long</span>)left + right;
+            }
+            <span class="keyword">else</span> <span class="keyword">if</span> (*p == <span class="string">'-'</span>)
+            {
+                value = (<span class="keyword">long</span> <span class="keyword">long</span>)left - right;
+            }
+            <span class="keyword">else</span> <span class="keyword">if</span> (*p == <span class="string">'*'</span>)
+            {
+                value = (<span class="keyword">long</span> <span class="keyword">long</span>)left * right;
+            }
+            <span class="keyword">else</span>
+            {
+                <span class="keyword">if</span> (right == <span class="number">0</span>)
+                {
+                    <span class="keyword">return</span> <span class="keyword">false</span>;
+                }
+                value = (<span class="keyword">long</span> <span class="keyword">long</span>)left / right;
+            }
+            <span class="keyword">if</span> (value &lt; INT_MIN || value &gt; INT_MAX || !push(&amp;st, (<span class="keyword">int</span>)value))
+            {
+                <span class="keyword">return</span> <span class="keyword">false</span>;
+            }
+            ++p;
+        }
+        <span class="keyword">else</span>
+        {
+            <span class="keyword">char</span> *end;
+            errno = <span class="number">0</span>;
+            <span class="keyword">long</span> value = strtol(p, &amp;end, <span class="number">10</span>);
+            <span class="keyword">if</span> (end == p || errno == ERANGE || value &lt; INT_MIN || value &gt; INT_MAX ||
+                (*end &amp;&amp; !isspace((<span class="keyword">unsigned</span> <span class="keyword">char</span>)*end)))
+            {
+                <span class="keyword">return</span> <span class="keyword">false</span>;
+            }
+            <span class="keyword">if</span> (!push(&amp;st, (<span class="keyword">int</span>)value))
+            {
+                <span class="keyword">return</span> <span class="keyword">false</span>;
+            }
+            p = end;
+        }
+    }
+    <span class="keyword">if</span> (st.top != <span class="number">0</span>)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    <span class="keyword">return</span> pop(&amp;st, answer);
+}</code></pre></div><p>每个 token 只处理一次，时间 O(输入字符数)，栈空间 O(token数)。本实现还检查了操作数不足、除零、非法 token、结果越界和最终栈中存在多余操作数。</p></article><article class="topic" id="s02-5"><h3>02.5 多维数组与特殊矩阵</h3><p>二维数组 <code>A[m][n]</code>，元素宽 w，基地址是 <code>A[0][0]</code>：行优先地址 <code>base+(i*n+j)*w</code>；列优先地址 <code>base+(j*m+i)*w</code>。C 的内建多维数组采用行优先。</p><div class="table-wrap"><table><thead><tr><th scope="col">对象</th><th scope="col">0 基压缩规则</th><th scope="col">长度</th></tr></thead><tbody><tr><td>对称矩阵，下三角含主对角</td><td>i≥j 时 k=i(i+1)/2+j，否则交换 i,j</td><td>n(n+1)/2</td></tr><tr><td>下三角矩阵</td><td>i≥j 同上；i&lt;j 访问公共常量槽</td><td>n(n+1)/2+1</td></tr><tr><td>上三角，按行存含对角</td><td>i≤j 时 k=i*n-i(i-1)/2+(j-i)</td><td>n(n+1)/2+1（另有常量槽）</td></tr><tr><td>三对角矩阵，按行压缩</td><td>合法带内元素 k=2i+j</td><td>n≥2 时 3n-2；n=1 时 1</td></tr></tbody></table></div><p>公式来源要能推：先数前面完整行的元素数，再加当前行偏移。对称矩阵上下三角存储是<strong>二选一</strong>；三角矩阵的另一半是同一常量。三对角矩阵只允许 <code>|i-j|≤1</code>。</p><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-10" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-10"><span class="keyword">int</span> symmetric_index(<span class="keyword">int</span> i, <span class="keyword">int</span> j)
+{
+    <span class="keyword">if</span> (i &lt; j)
+    {
+        <span class="keyword">int</span> t = i;
+        i = j;
+        j = t;
+    }
+    <span class="keyword">return</span> i * (i + <span class="number">1</span>) / <span class="number">2</span> + j;
+}
+
+<span class="keyword">int</span> tridiagonal_index(<span class="keyword">int</span> n, <span class="keyword">int</span> i, <span class="keyword">int</span> j)
+{
+    <span class="keyword">if</span> (i &lt; <span class="number">0</span> || i &gt;= n || j &lt; <span class="number">0</span> || j &gt;= n || abs(i - j) &gt; <span class="number">1</span>)
+    {
+        <span class="keyword">return</span> -<span class="number">1</span>;
+    }
+    <span class="keyword">return</span> <span class="number">2</span> * i + j;
+}
+
+<span class="comment">/* 稀疏矩阵三元组：输入按行有序，转置后仍按行有序。
+   列数 cols&lt;=CAP，非零元数 nnz&lt;=CAP；行列从0开始。 */</span>
+<span class="keyword">typedef</span> <span class="keyword">struct</span>
+{
+    <span class="keyword">int</span> row, col, value;
+} Triple;
+
+<span class="keyword">void</span> fast_transpose(<span class="keyword">const</span> Triple a[], <span class="keyword">int</span> nnz, <span class="keyword">int</span> cols, Triple b[])
+{
+    <span class="keyword">int</span> count[CAP] = {<span class="number">0</span>}, start[CAP];
+    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; nnz; ++k)
+    {
+        ++count[a[k].col];
+    }
+    <span class="keyword">int</span> sum = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> c = <span class="number">0</span>; c &lt; cols; ++c)
+    {
+        start[c] = sum;
+        sum += count[c];
+    }
+    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; nnz; ++k)
+    {
+        <span class="keyword">int</span> pos = start[a[k].col]++;
+        b[pos] = (Triple){a[k].col, a[k].row, a[k].value};
+    }
+}</code></pre></div><p>快速转置 O(cols+nnz) 时间、O(cols) 辅助空间，不含输出数组。稀疏三元组存储不支持一般意义上的按位置 O(1) 随机访问。</p></article><article class="topic" id="s02-6"><h3>02.6 例题、自测与答案</h3><p><strong>例：</strong>循环队列容量 8，front=6，rear=2，长度 <code>(2-6+8)%8=4</code>，下次入队写下标 2，再令 rear=3。</p><p><strong>例：</strong>后缀 <code>8 3 2 - /</code>：先算 <code>3-2=1</code>，再算 <code>8/1=8</code>。不能把弹出次序写成 <code>2-3</code>。</p><p><strong>自测：</strong>①入栈 1,2,3，能否出栈 3,1,2？②CAP=8，front=3，rear=2，是否满？③5 阶对称矩阵存下三角，A[1][4] 在哪？④两个栈队列是否每次都必须搬运？</p><details class="answer"><summary>查看参考答案</summary><p><strong>答案：</strong>①不能，3 出栈后栈顶为 2。②满，<code>(2+1)%8=3</code>，长度 7。③交换为 A[4][1]，k=4×5/2+1=11。④只在 out 为空时搬运，否则会破坏先进先出顺序。</p></details></article></section><section class="chapter" id="ch03" aria-labelledby="title-ch03"><div class="chapter-heading"><span>CHAPTER 03</span><h2 id="title-ch03">串与模式匹配</h2><div class="chapter-subnav"><a href="#s03-1">03.1 考点地图与定义</a><a href="#s03-2">03.2 朴素匹配</a><a href="#s03-3">03.3 KMP：统一采用前缀函数 pi</a><a href="#s03-4">03.4 教材 next / nextval 如何对应</a><a href="#s03-5">03.5 手算例题、自测与答案</a></div></div><article class="topic" id="s03-1"><h3>03.1 考点地图与定义</h3><p>串的长度是字符数；空串长度 0，空格串仍含字符。子串是连续片段，子序列可不连续。C 字符串以 <code>'\0'</code> 结尾，本章按<strong>字节</strong>比较，不按 Unicode 汉字个数比较。模式匹配在整个 408 知识体系中也常归到查找；这里独立成章便于复习。</p><div class="table-wrap"><table><thead><tr><th scope="col">内容</th><th scope="col">要求</th><th scope="col">时间</th></tr></thead><tbody><tr><td>朴素匹配 BF</td><td>起点移动，主串/模式位置关系</td><td>最坏 O(nm)</td></tr><tr><td>KMP</td><td>前后缀含义，构造 pi，匹配时仅回退模式</td><td>O(n+m)</td></tr><tr><td>next / nextval</td><td>与教材下标约定对应，手算回退</td><td>构造 O(m)</td></tr><tr><td>串操作</td><td>长度、比较、子串、连接及容量边界</td><td>按操作分析</td></tr></tbody></table></div></article><article class="topic" id="s03-2"><h3>03.2 朴素匹配</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-11" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-11"><span class="keyword">int</span> bf_find(<span class="keyword">const</span> <span class="keyword">char</span> *s, <span class="keyword">const</span> <span class="keyword">char</span> *p)
+{
+    <span class="keyword">int</span> n = (<span class="keyword">int</span>)strlen(s), m = (<span class="keyword">int</span>)strlen(p);
+    <span class="keyword">if</span> (m == <span class="number">0</span>)
+    {
+        <span class="keyword">return</span> <span class="number">0</span>;
+    }
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i + m &lt;= n; ++i)
+    {
+        <span class="keyword">int</span> j = <span class="number">0</span>;
+        <span class="keyword">while</span> (j &lt; m &amp;&amp; s[i + j] == p[j])
+        {
+            ++j;
+        }
+        <span class="keyword">if</span> (j == m)
+        {
+            <span class="keyword">return</span> i;
+        }
+    }
+    <span class="keyword">return</span> -<span class="number">1</span>;
+}</code></pre></div><p>每次失配将候选起点增加 1；最坏例子是主串大量 a、模式为若干 a 后跟 b。不能把 BF 最坏复杂度写成 O(n+m)。</p></article><article class="topic" id="s03-3"><h3>03.3 KMP：统一采用前缀函数 pi</h3><p><code>pi[i]</code> 表示 <code>p[0..i]</code> 的最长相等<strong>真前缀与真后缀</strong>长度。“真”表示不能使用整个串自身。pi 存的是长度，取值 0..i。</p><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-12" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-12"><span class="keyword">void</span> build_pi(<span class="keyword">const</span> <span class="keyword">char</span> *p, <span class="keyword">int</span> pi[])
+{
+    <span class="keyword">int</span> m = (<span class="keyword">int</span>)strlen(p);
+    <span class="keyword">if</span> (m == <span class="number">0</span>)
+    {
+        <span class="keyword">return</span>;
+    }
+    pi[<span class="number">0</span>] = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>, j = <span class="number">0</span>; i &lt; m; ++i)
+    {
+        <span class="keyword">while</span> (j &gt; <span class="number">0</span> &amp;&amp; p[i] != p[j])
+        {
+            j = pi[j - <span class="number">1</span>];
+        }
+        <span class="keyword">if</span> (p[i] == p[j])
+        {
+            ++j;
+        }
+        pi[i] = j;
+    }
+}
+
+<span class="keyword">int</span> kmp_find(<span class="keyword">const</span> <span class="keyword">char</span> *s, <span class="keyword">const</span> <span class="keyword">char</span> *p)
+{
+    <span class="keyword">int</span> n = (<span class="keyword">int</span>)strlen(s), m = (<span class="keyword">int</span>)strlen(p);
+    <span class="keyword">if</span> (m == <span class="number">0</span>)
+    {
+        <span class="keyword">return</span> <span class="number">0</span>;
+    }
+    <span class="keyword">int</span> *pi = xmalloc((<span class="keyword">size_t</span>)m * <span class="keyword">sizeof</span> *pi);
+    build_pi(p, pi);
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt; n; ++i)
+    {
+        <span class="keyword">while</span> (j &gt; <span class="number">0</span> &amp;&amp; s[i] != p[j])
+        {
+            j = pi[j - <span class="number">1</span>];
+        }
+        <span class="keyword">if</span> (s[i] == p[j])
+        {
+            ++j;
+        }
+        <span class="keyword">if</span> (j == m)
+        {
+            free(pi);
+            <span class="keyword">return</span> i - m + <span class="number">1</span>;
+        }
+    }
+    free(pi);
+    <span class="keyword">return</span> -<span class="number">1</span>;
+}
+
+<span class="comment">/* 返回全部出现次数，包括重叠匹配；空模式按 n+1 个边界计数。 */</span>
+<span class="keyword">int</span> kmp_count(<span class="keyword">const</span> <span class="keyword">char</span> *s, <span class="keyword">const</span> <span class="keyword">char</span> *p)
+{
+    <span class="keyword">int</span> n = (<span class="keyword">int</span>)strlen(s), m = (<span class="keyword">int</span>)strlen(p), count = <span class="number">0</span>;
+    <span class="keyword">if</span> (m == <span class="number">0</span>)
+    {
+        <span class="keyword">return</span> n + <span class="number">1</span>;
+    }
+    <span class="keyword">int</span> *pi = xmalloc((<span class="keyword">size_t</span>)m * <span class="keyword">sizeof</span> *pi);
+    build_pi(p, pi);
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt; n; ++i)
+    {
+        <span class="keyword">while</span> (j &gt; <span class="number">0</span> &amp;&amp; s[i] != p[j])
+        {
+            j = pi[j - <span class="number">1</span>];
+        }
+        <span class="keyword">if</span> (s[i] == p[j])
+        {
+            ++j;
+        }
+        <span class="keyword">if</span> (j == m)
+        {
+            ++count;
+            j = pi[j - <span class="number">1</span>];
+        }
+    }
+    free(pi);
+    <span class="keyword">return</span> count;
+}</code></pre></div><p>匹配不变量：处理主串 <code>s[i]</code> 前，模式前 j 个字符与已处理主串的最后 j 个字符相同。失配后 <code>j=pi[j-1]</code> 保留最长可继续利用的边界，i 不后退。j 的上升和下降总次数受线性约束；预处理 O(m)，匹配 O(n)，辅助空间 O(m)。</p></article><article class="topic" id="s03-4"><h3>03.4 教材 next / nextval 如何对应</h3><p>常见教材使用 1 基模式串，<code>next[1]=0</code>，j=0 是特殊状态。与本章 pi 的关系为：<strong>j≥2 时 <code>next[j]=pi[j-2]+1</code></strong>。这只适用于上述 next 定义，不能把任何名为 next 的数组都机械转换。</p><p>本节另给 <strong>0 基、next[0]=-1</strong> 的 nextval 构造；失配回退索引也必须使用相同版本。它不能直接替代上面 <code>pi[j-1]</code> 的表达式。</p><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-13" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-13"><span class="keyword">void</span> build_nextval(<span class="keyword">const</span> <span class="keyword">char</span> *p, <span class="keyword">int</span> nv[])
+{
+    <span class="keyword">int</span> m = (<span class="keyword">int</span>)strlen(p);
+    <span class="keyword">if</span> (m == <span class="number">0</span>)
+    {
+        <span class="keyword">return</span>;
+    }
+    <span class="keyword">int</span> i = <span class="number">0</span>, j = -<span class="number">1</span>;
+    nv[<span class="number">0</span>] = -<span class="number">1</span>;
+    <span class="keyword">while</span> (i + <span class="number">1</span> &lt; m)
+    {
+        <span class="keyword">if</span> (j == -<span class="number">1</span> || p[i] == p[j])
+        {
+            ++i;
+            ++j;
+            nv[i] = p[i] == p[j] ? nv[j] : j;
+        }
+        <span class="keyword">else</span>
+        {
+            j = nv[j];
+        }
+    }
+}
+
+<span class="keyword">int</span> kmp_nextval_find(<span class="keyword">const</span> <span class="keyword">char</span> *s, <span class="keyword">const</span> <span class="keyword">char</span> *p)
+{
+    <span class="keyword">int</span> n = (<span class="keyword">int</span>)strlen(s), m = (<span class="keyword">int</span>)strlen(p);
+    <span class="keyword">if</span> (m == <span class="number">0</span>)
+    {
+        <span class="keyword">return</span> <span class="number">0</span>;
+    }
+    <span class="keyword">int</span> *nv = xmalloc((<span class="keyword">size_t</span>)m * <span class="keyword">sizeof</span> *nv);
+    build_nextval(p, nv);
+    <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;
+    <span class="keyword">while</span> (i &lt; n &amp;&amp; j &lt; m)
+    {
+        <span class="keyword">if</span> (j == -<span class="number">1</span> || s[i] == p[j])
+        {
+            ++i;
+            ++j;
+        }
+        <span class="keyword">else</span>
+        {
+            j = nv[j];
+        }
+    }
+    free(nv);
+    <span class="keyword">return</span> j == m ? i - m : -<span class="number">1</span>;
+}</code></pre></div><p>nextval 的作用：若回退后的模式字符仍等于刚失配的模式字符，就继续回退，省去必定失败的比较。并不改变 KMP 的渐近复杂度。</p></article><article class="topic" id="s03-5"><h3>03.5 手算例题、自测与答案</h3><p><strong>例：</strong>模式 <code>ababaca</code>：</p><div class="table-wrap"><table><thead><tr><th scope="col">i</th><th scope="col">0</th><th scope="col">1</th><th scope="col">2</th><th scope="col">3</th><th scope="col">4</th><th scope="col">5</th><th scope="col">6</th></tr></thead><tbody><tr><td>p[i]</td><td>a</td><td>b</td><td>a</td><td>b</td><td>a</td><td>c</td><td>a</td></tr><tr><td>pi[i]</td><td>0</td><td>0</td><td>1</td><td>2</td><td>3</td><td>0</td><td>1</td></tr><tr><td>1 基 next[i+1]</td><td>0</td><td>1</td><td>1</td><td>2</td><td>3</td><td>4</td><td>1</td></tr></tbody></table></div><p>到 i=5 的 c 时，j 从 3 回退到 pi[2]=1，再到 pi[0]=0，仍不匹配，因此 pi[5]=0。先区分“已经匹配了几个字符”与“下次比较哪个下标”。</p><p><strong>自测：</strong>①<code>aaaaa</code> 中 <code>aaa</code> 出现几次？②匹配成功后找全部重叠位置，j 如何更新？③空模式的位置如何约定？④主串匹配下标 i 在 KMP 中能否回退？</p><details class="answer"><summary>查看参考答案</summary><p><strong>答案：</strong>①3 次，起点 0、1、2。②<code>j=pi[m-1]</code>，不清零。③本章首次匹配返回 0，计数为 n+1；题目若另有规定以题意为准。④不回退，失配调整 j。</p></details></article></section><section class="chapter" id="ch04" aria-labelledby="title-ch04"><div class="chapter-heading"><span>CHAPTER 04</span><h2 id="title-ch04">树与二叉树</h2><div class="chapter-subnav"><a href="#s04-1">04.1 考点地图与基本性质</a><a href="#s04-2">04.2 递归模板：空树、分解、合并</a><a href="#s04-3">04.3 非递归遍历、层序与完全性</a><a href="#s04-4">04.4 由遍历序列重建</a><a href="#s04-5">04.5 中序线索化</a><a href="#s04-6">04.6 树、森林与孩子兄弟表示</a><a href="#s04-7">04.7 Huffman 树与编码</a><a href="#s04-8">04.8 例题、自测与答案</a></div></div><article class="topic" id="s04-1"><h3>04.1 考点地图与基本性质</h3><div class="table-wrap"><table><thead><tr><th scope="col">内容</th><th scope="col">要达到的能力</th><th scope="col">标记</th></tr></thead><tbody><tr><td>二叉链表、顺序存储</td><td>编号、孩子/双亲位置、空指针数</td><td>写/推</td></tr><tr><td>遍历</td><td>先中后序递归、非递归、层序</td><td>写</td></tr><tr><td>递归应用</td><td>高度、叶子数、镜像、祖先、平衡判定</td><td>写</td></tr><tr><td>完全二叉树</td><td>层序判定、最后非叶结点、结点数性质</td><td>写/推</td></tr><tr><td>线索二叉树</td><td>ltag/rtag、构造、前驱后继</td><td>写/推</td></tr><tr><td>树与森林</td><td>双亲/孩子/孩子兄弟表示，转换与遍历</td><td>推</td></tr><tr><td>Huffman</td><td>合并过程、WPL、编码、前缀性质</td><td>写/推</td></tr><tr><td>并查集与堆</td><td>合并查找，堆调整</td><td>写；实现见图/排序</td></tr></tbody></table></div><p>二叉树允许左右子树为空，左右有序；它不是任意“度≤2的树”的同义词。非空二叉树 <code>n0=n2+1</code>，n 个结点的二叉链表有 <code>n+1</code> 个空孩子指针。高度 h 的二叉树最多 <code>2^h-1</code> 个结点；有 n 个结点的完全二叉树高度为 <code>⌊log2 n⌋+1</code>。</p><p>完全二叉树按 0 基数组存储：左孩子 <code>2i+1</code>，右孩子 <code>2i+2</code>，非根结点双亲 <code>(i-1)/2</code>；孩子下标必须 <code>&lt;n</code>。一般二叉树顺序存储会浪费空间。</p></article><article class="topic" id="s04-2"><h3>04.2 递归模板：空树、分解、合并</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-14" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-14"><span class="keyword">typedef</span> <span class="keyword">struct</span> BNode
+{
+    <span class="keyword">int</span> data;
+    <span class="keyword">struct</span> BNode *left, *right;
+} BNode;
+
+BNode *tree_new(<span class="keyword">int</span> x)
+{
+    BNode *p = xmalloc(<span class="keyword">sizeof</span> *p);
+    p-&gt;data = x;
+    p-&gt;left = p-&gt;right = <span class="keyword">NULL</span>;
+    <span class="keyword">return</span> p;
+}
+
+<span class="keyword">void</span> tree_destroy(BNode *t)
+{
+    <span class="keyword">if</span> (!t)
+    {
+        <span class="keyword">return</span>;
+    }
+    tree_destroy(t-&gt;left);
+    tree_destroy(t-&gt;right);
+    free(t);
+}
+
+<span class="comment">/* out 至少能放下全部结点；*k 入参通常为0。 */</span>
+<span class="keyword">void</span> preorder(BNode *t, <span class="keyword">int</span> out[], <span class="keyword">int</span> *k)
+{
+    <span class="keyword">if</span> (!t)
+    {
+        <span class="keyword">return</span>;
+    }
+    out[(*k)++] = t-&gt;data;
+    preorder(t-&gt;left, out, k);
+    preorder(t-&gt;right, out, k);
+}
+
+<span class="keyword">void</span> inorder(BNode *t, <span class="keyword">int</span> out[], <span class="keyword">int</span> *k)
+{
+    <span class="keyword">if</span> (!t)
+    {
+        <span class="keyword">return</span>;
+    }
+    inorder(t-&gt;left, out, k);
+    out[(*k)++] = t-&gt;data;
+    inorder(t-&gt;right, out, k);
+}
+
+<span class="keyword">void</span> postorder(BNode *t, <span class="keyword">int</span> out[], <span class="keyword">int</span> *k)
+{
+    <span class="keyword">if</span> (!t)
+    {
+        <span class="keyword">return</span>;
+    }
+    postorder(t-&gt;left, out, k);
+    postorder(t-&gt;right, out, k);
+    out[(*k)++] = t-&gt;data;
+}
+
+<span class="keyword">int</span> tree_height(BNode *t)
+{
+    <span class="keyword">if</span> (!t)
+    {
+        <span class="keyword">return</span> <span class="number">0</span>;
+    }
+    <span class="keyword">int</span> a = tree_height(t-&gt;left), b = tree_height(t-&gt;right);
+    <span class="keyword">return</span> <span class="number">1</span> + (a &gt; b ? a : b);
+}
+
+<span class="keyword">int</span> leaf_count(BNode *t)
+{
+    <span class="keyword">if</span> (!t)
+    {
+        <span class="keyword">return</span> <span class="number">0</span>;
+    }
+    <span class="keyword">if</span> (!t-&gt;left &amp;&amp; !t-&gt;right)
+    {
+        <span class="keyword">return</span> <span class="number">1</span>;
+    }
+    <span class="keyword">return</span> leaf_count(t-&gt;left) + leaf_count(t-&gt;right);
+}
+
+<span class="keyword">void</span> mirror(BNode *t)
+{
+    <span class="keyword">if</span> (!t)
+    {
+        <span class="keyword">return</span>;
+    }
+    BNode *p = t-&gt;left;
+    t-&gt;left = t-&gt;right;
+    t-&gt;right = p;
+    mirror(t-&gt;left);
+    mirror(t-&gt;right);
+}
+
+<span class="comment">/* 返回高度，若不平衡则返回-1，避免重复计算每个子树高度。 */</span>
+<span class="keyword">int</span> balanced_height(BNode *t)
+{
+    <span class="keyword">if</span> (!t)
+    {
+        <span class="keyword">return</span> <span class="number">0</span>;
+    }
+    <span class="keyword">int</span> l = balanced_height(t-&gt;left);
+    <span class="keyword">if</span> (l &lt; <span class="number">0</span>)
+    {
+        <span class="keyword">return</span> -<span class="number">1</span>;
+    }
+    <span class="keyword">int</span> r = balanced_height(t-&gt;right);
+    <span class="keyword">if</span> (r &lt; <span class="number">0</span> || abs(l - r) &gt; <span class="number">1</span>)
+    {
+        <span class="keyword">return</span> -<span class="number">1</span>;
+    }
+    <span class="keyword">return</span> <span class="number">1</span> + (l &gt; r ? l : r);
+}
+
+<span class="comment">/* p、q 是树内两个真实结点的地址，调用者保证都存在。 */</span>
+BNode *lca(BNode *t, BNode *p, BNode *q)
+{
+    <span class="keyword">if</span> (!t || t == p || t == q)
+    {
+        <span class="keyword">return</span> t;
+    }
+    BNode *l = lca(t-&gt;left, p, q), *r = lca(t-&gt;right, p, q);
+    <span class="keyword">if</span> (l &amp;&amp; r)
+    {
+        <span class="keyword">return</span> t;
+    }
+    <span class="keyword">return</span> l ? l : r;
+}</code></pre></div><p>上述递归函数通常访问每个结点常数次，时间 O(n)、调用栈 O(h)；最坏链状树 h=n。逐个结点调用 <code>tree_height</code> 再判平衡会最坏 O(n²)，<code>balanced_height</code> 一次后序扫描即 O(n)。普通二叉树 LCA 不能按值大小选择左右分支；那是 BST 才有的性质。</p></article><article class="topic" id="s04-3"><h3>04.3 非递归遍历、层序与完全性</h3><p>以下显式栈和队列要求结点总数≤CAP，输出数组容量≥结点数。</p><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-15" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-15"><span class="keyword">int</span> inorder_iter(BNode *t, <span class="keyword">int</span> out[])
+{
+    BNode *st[CAP], *p = t;
+    <span class="keyword">int</span> top = <span class="number">0</span>, k = <span class="number">0</span>;
+    <span class="keyword">while</span> (p || top)
+    {
+        <span class="keyword">while</span> (p)
+        {
+            st[top++] = p;
+            p = p-&gt;left;
+        }
+        p = st[--top];
+        out[k++] = p-&gt;data;
+        p = p-&gt;right;
+    }
+    <span class="keyword">return</span> k;
+}
+
+<span class="keyword">int</span> preorder_iter(BNode *t, <span class="keyword">int</span> out[])
+{
+    BNode *st[CAP];
+    <span class="keyword">int</span> top = <span class="number">0</span>, k = <span class="number">0</span>;
+    <span class="keyword">if</span> (t)
+    {
+        st[top++] = t;
+    }
+    <span class="keyword">while</span> (top)
+    {
+        BNode *p = st[--top];
+        out[k++] = p-&gt;data;
+        <span class="keyword">if</span> (p-&gt;right)
+        {
+            st[top++] = p-&gt;right; <span class="comment">/* 右先入，左先出。 */</span>
+        }
+        <span class="keyword">if</span> (p-&gt;left)
+        {
+            st[top++] = p-&gt;left;
+        }
+    }
+    <span class="keyword">return</span> k;
+}
+
+<span class="keyword">int</span> postorder_iter(BNode *t, <span class="keyword">int</span> out[])
+{
+    BNode *st[CAP], *p = t, *last = <span class="keyword">NULL</span>;
+    <span class="keyword">int</span> top = <span class="number">0</span>, k = <span class="number">0</span>;
+    <span class="keyword">while</span> (p || top)
+    {
+        <span class="keyword">if</span> (p)
+        {
+            st[top++] = p;
+            p = p-&gt;left;
+        }
+        <span class="keyword">else</span>
+        {
+            BNode *q = st[top - <span class="number">1</span>];
+            <span class="keyword">if</span> (q-&gt;right &amp;&amp; last != q-&gt;right)
+            {
+                p = q-&gt;right;
+            }
+            <span class="keyword">else</span>
+            {
+                out[k++] = q-&gt;data;
+                last = q;
+                --top;
+            }
+        }
+    }
+    <span class="keyword">return</span> k;
+}
+
+<span class="keyword">int</span> levelorder(BNode *t, <span class="keyword">int</span> out[])
+{
+    BNode *q[CAP];
+    <span class="keyword">int</span> f = <span class="number">0</span>, r = <span class="number">0</span>, k = <span class="number">0</span>;
+    <span class="keyword">if</span> (t)
+    {
+        q[r++] = t;
+    }
+    <span class="keyword">while</span> (f &lt; r)
+    {
+        BNode *p = q[f++];
+        out[k++] = p-&gt;data;
+        <span class="keyword">if</span> (p-&gt;left)
+        {
+            q[r++] = p-&gt;left;
+        }
+        <span class="keyword">if</span> (p-&gt;right)
+        {
+            q[r++] = p-&gt;right;
+        }
+    }
+    <span class="keyword">return</span> k;
+}
+
+<span class="keyword">int</span> tree_width(BNode *t)
+{
+    BNode *q[CAP];
+    <span class="keyword">int</span> f = <span class="number">0</span>, r = <span class="number">0</span>, best = <span class="number">0</span>;
+    <span class="keyword">if</span> (t)
+    {
+        q[r++] = t;
+    }
+    <span class="keyword">while</span> (f &lt; r)
+    {
+        <span class="keyword">int</span> end = r, width = r - f;
+        <span class="keyword">if</span> (width &gt; best)
+        {
+            best = width;
+        }
+        <span class="keyword">while</span> (f &lt; end)
+        {
+            BNode *p = q[f++];
+            <span class="keyword">if</span> (p-&gt;left)
+            {
+                q[r++] = p-&gt;left;
+            }
+            <span class="keyword">if</span> (p-&gt;right)
+            {
+                q[r++] = p-&gt;right;
+            }
+        }
+    }
+    <span class="keyword">return</span> best;
+}
+
+<span class="keyword">bool</span> is_complete(BNode *t)
+{
+    BNode *q[<span class="number">2</span> * CAP + <span class="number">1</span>];
+    <span class="keyword">int</span> f = <span class="number">0</span>, r = <span class="number">0</span>;
+    <span class="keyword">bool</span> gap = <span class="keyword">false</span>;
+    q[r++] = t;
+    <span class="keyword">while</span> (f &lt; r)
+    {
+        BNode *p = q[f++];
+        <span class="keyword">if</span> (!p)
+        {
+            gap = <span class="keyword">true</span>;
+        }
+        <span class="keyword">else</span>
+        {
+            <span class="keyword">if</span> (gap)
+            {
+                <span class="keyword">return</span> <span class="keyword">false</span>;
+            }
+            q[r++] = p-&gt;left;
+            q[r++] = p-&gt;right;
+        }
+    }
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}</code></pre></div><p>后序非递归中 <code>last</code> 是最后处理完的结点：右子树未处理时先转入右子树，否则访问根。完全性判定的含义是层序出现空位后，后面不允许再出现有效结点。层序队列 O(n) 辅助空间；若循环复用队列单元，实际可按最大层宽优化。</p></article><article class="topic" id="s04-4"><h3>04.4 由遍历序列重建</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-16" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-16"><span class="comment">/* 前提：元素互异，pre/in合法且包含相同元素；区间长度n。 */</span>
+BNode *build_pre_in(<span class="keyword">const</span> <span class="keyword">int</span> pre[], <span class="keyword">const</span> <span class="keyword">int</span> in[], <span class="keyword">int</span> n)
+{
+    <span class="keyword">if</span> (n == <span class="number">0</span>)
+    {
+        <span class="keyword">return</span> <span class="keyword">NULL</span>;
+    }
+    <span class="keyword">int</span> k = <span class="number">0</span>;
+    <span class="keyword">while</span> (k &lt; n &amp;&amp; in[k] != pre[<span class="number">0</span>])
+    {
+        ++k;
+    }
+    assert(k &lt; n);
+    BNode *t = tree_new(pre[<span class="number">0</span>]);
+    t-&gt;left = build_pre_in(pre + <span class="number">1</span>, in, k);
+    t-&gt;right = build_pre_in(pre + <span class="number">1</span> + k, in + k + <span class="number">1</span>, n - k - <span class="number">1</span>);
+    <span class="keyword">return</span> t;
+}</code></pre></div><p>先序确定根，中序确定左右范围。此实现最坏 O(n²)，辅助递归栈 O(h)；预建元素到中序位置的索引可降低查找代价。<strong>先序+中序、后序+中序</strong>在元素互异时能唯一重建；先序+后序通常不能，单孩子到底在左还是右不确定。</p></article><article class="topic" id="s04-5"><h3>04.5 中序线索化</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-17" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-17"><span class="keyword">typedef</span> <span class="keyword">struct</span> TNode
+{
+    <span class="keyword">int</span> data;
+    <span class="keyword">struct</span> TNode *left, *right;
+    <span class="keyword">bool</span> ltag, rtag; <span class="comment">/* false=孩子，true=线索。 */</span>
+} TNode;
+
+TNode *thread_copy(BNode *t)
+{
+    <span class="keyword">if</span> (!t)
+    {
+        <span class="keyword">return</span> <span class="keyword">NULL</span>;
+    }
+    TNode *p = xmalloc(<span class="keyword">sizeof</span> *p);
+    p-&gt;data = t-&gt;data;
+    p-&gt;ltag = p-&gt;rtag = <span class="keyword">false</span>;
+    p-&gt;left = thread_copy(t-&gt;left);
+    p-&gt;right = thread_copy(t-&gt;right);
+    <span class="keyword">return</span> p;
+}
+
+<span class="keyword">void</span> thread_visit(TNode *t, TNode **pre)
+{
+    <span class="keyword">if</span> (!t)
+    {
+        <span class="keyword">return</span>;
+    }
+    <span class="keyword">if</span> (!t-&gt;ltag)
+    {
+        thread_visit(t-&gt;left, pre);
+    }
+    <span class="keyword">if</span> (!t-&gt;left)
+    {
+        t-&gt;ltag = <span class="keyword">true</span>;
+        t-&gt;left = *pre;
+    }
+    <span class="keyword">if</span> (*pre &amp;&amp; !(*pre)-&gt;right)
+    {
+        (*pre)-&gt;rtag = <span class="keyword">true</span>;
+        (*pre)-&gt;right = t;
+    }
+    *pre = t;
+    <span class="keyword">if</span> (!t-&gt;rtag)
+    {
+        thread_visit(t-&gt;right, pre);
+    }
+}
+
+<span class="comment">/* 输入必须是尚未线索化的树；无头结点版本。 */</span>
+<span class="keyword">void</span> make_inorder_threads(TNode *t)
+{
+    TNode *pre = <span class="keyword">NULL</span>;
+    thread_visit(t, &amp;pre);
+    <span class="keyword">if</span> (pre &amp;&amp; !pre-&gt;right)
+    {
+        pre-&gt;rtag = <span class="keyword">true</span>;
+    }
+}
+
+TNode *thread_first(TNode *t)
+{
+    <span class="keyword">while</span> (t &amp;&amp; !t-&gt;ltag)
+    {
+        t = t-&gt;left;
+    }
+    <span class="keyword">return</span> t;
+}
+
+TNode *thread_next(TNode *p)
+{
+    <span class="keyword">if</span> (!p)
+    {
+        <span class="keyword">return</span> <span class="keyword">NULL</span>;
+    }
+    <span class="keyword">return</span> p-&gt;rtag ? p-&gt;right : thread_first(p-&gt;right);
+}
+
+TNode *thread_prev(TNode *p)
+{
+    <span class="keyword">if</span> (!p)
+    {
+        <span class="keyword">return</span> <span class="keyword">NULL</span>;
+    }
+    <span class="keyword">if</span> (p-&gt;ltag)
+    {
+        <span class="keyword">return</span> p-&gt;left;
+    }
+    p = p-&gt;left;
+    <span class="keyword">while</span> (p &amp;&amp; !p-&gt;rtag)
+    {
+        p = p-&gt;right;
+    }
+    <span class="keyword">return</span> p;
+}
+
+<span class="keyword">void</span> thread_destroy(TNode *t)
+{
+    <span class="keyword">if</span> (!t)
+    {
+        <span class="keyword">return</span>;
+    }
+    <span class="keyword">if</span> (!t-&gt;ltag)
+    {
+        thread_destroy(t-&gt;left);
+    }
+    <span class="keyword">if</span> (!t-&gt;rtag)
+    {
+        thread_destroy(t-&gt;right);
+    }
+    free(t);
+}</code></pre></div><p>构造 O(n) 时间，递归 O(h) 空间；线索遍历总 O(n)、额外 O(1)。后继若是右线索直接返回；若有右子树，进入右子树找最左结点。不要把线索当孩子递归，否则可能成环。此处无头结点，最后一个结点右线索为 NULL，与带头结点的教材模板边界不同。</p></article><article class="topic" id="s04-6"><h3>04.6 树、森林与孩子兄弟表示</h3><p>普通树可用双亲数组、孩子链表、孩子兄弟表示。孩子兄弟结点的 <code>first_child</code> 对应二叉树左孩子，<code>next_sibling</code> 对应右孩子；同一棵普通树的根没有右兄弟，森林多个根通过右兄弟链接。</p><div class="table-wrap"><table><thead><tr><th scope="col">原对象遍历</th><th scope="col">对应二叉表示遍历</th></tr></thead><tbody><tr><td>普通树先根遍历</td><td>先序</td></tr><tr><td>普通树后根遍历</td><td>中序</td></tr><tr><td>森林先序遍历</td><td>先序</td></tr><tr><td>森林中序遍历</td><td>中序</td></tr></tbody></table></div><p>这里森林中序采用“先第一棵树的子森林，再根，再其余森林”的教材约定。普通树高度不能直接使用二叉树高度函数，因为兄弟链接并不增加普通树层数。</p><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-18" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-18"><span class="keyword">typedef</span> <span class="keyword">struct</span> GNode
+{
+    <span class="keyword">int</span> data;
+    <span class="keyword">struct</span> GNode *first_child, *next_sibling;
+} GNode;
+
+<span class="comment">/* 输入森林的第一棵树根；每个兄弟都在相同层。 */</span>
+<span class="keyword">int</span> forest_height(GNode *t)
+{
+    <span class="keyword">if</span> (!t)
+    {
+        <span class="keyword">return</span> <span class="number">0</span>;
+    }
+    <span class="keyword">int</span> own = <span class="number">1</span> + forest_height(t-&gt;first_child);
+    <span class="keyword">int</span> rest = forest_height(t-&gt;next_sibling);
+    <span class="keyword">return</span> own &gt; rest ? own : rest;
+}</code></pre></div></article><article class="topic" id="s04-7"><h3>04.7 Huffman 树与编码</h3><p>n 个正权叶结点，每次取当前最小两个权合并，直到剩一个根。n≥2 时共 2n-1 个结点，所有内部结点度为 2。WPL 为叶权×根到叶的<strong>边数</strong>之和，也等于每次合并得到的权之和。相同权值选择可能不同，所以树形、编码未必唯一，最优 WPL 相同。</p><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-19" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-19"><span class="comment">/* 用数组表示树：前n个为叶，后面为内部结点。n在1..CAP。 */</span>
+<span class="keyword">typedef</span> <span class="keyword">struct</span>
+{
+    <span class="keyword">int</span> weight, parent, left, right;
+} HNode;
+
+<span class="keyword">int</span> huffman_build(<span class="keyword">const</span> <span class="keyword">int</span> w[], <span class="keyword">int</span> n, HNode h[])
+{
+    assert(n &gt;= <span class="number">1</span> &amp;&amp; n &lt;= CAP);
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span> * n - <span class="number">1</span>; ++i)
+    {
+        h[i] = (HNode){i &lt; n ? w[i] : <span class="number">0</span>, -<span class="number">1</span>, -<span class="number">1</span>, -<span class="number">1</span>};
+        <span class="keyword">if</span> (i &lt; n)
+        {
+            assert(w[i] &gt; <span class="number">0</span>);
+        }
+    }
+    <span class="keyword">int</span> wpl = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &lt; <span class="number">2</span> * n - <span class="number">1</span>; ++i)
+    {
+        <span class="keyword">int</span> a = -<span class="number">1</span>, b = -<span class="number">1</span>;
+        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; ++j)
+        {
+            <span class="keyword">if</span> (h[j].parent == -<span class="number">1</span>)
+            {
+                <span class="keyword">if</span> (a == -<span class="number">1</span> || h[j].weight &lt; h[a].weight)
+                {
+                    b = a;
+                    a = j;
+                }
+                <span class="keyword">else</span> <span class="keyword">if</span> (b == -<span class="number">1</span> || h[j].weight &lt; h[b].weight)
+                {
+                    b = j;
+                }
+            }
+        }
+        h[a].parent = h[b].parent = i;
+        h[i].left = a;
+        h[i].right = b;
+        h[i].weight = h[a].weight + h[b].weight;
+        wpl += h[i].weight;
+    }
+    <span class="keyword">return</span> wpl;
+}
+
+<span class="comment">/* 从叶向根产生反向编码后逆置，out容量至少CAP+1。单符号约定为&quot;0&quot;。 */</span>
+<span class="keyword">void</span> huffman_code(<span class="keyword">const</span> HNode h[], <span class="keyword">int</span> leaf, <span class="keyword">char</span> out[])
+{
+    <span class="keyword">int</span> len = <span class="number">0</span>, child = leaf, parent = h[child].parent;
+    <span class="keyword">if</span> (parent == -<span class="number">1</span>)
+    {
+        strcpy(out, <span class="string">&quot;0&quot;</span>);
+        <span class="keyword">return</span>;
+    }
+    <span class="keyword">while</span> (parent != -<span class="number">1</span>)
+    {
+        out[len++] = h[parent].left == child ? <span class="string">'0'</span> : <span class="string">'1'</span>;
+        child = parent;
+        parent = h[child].parent;
+    }
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len / <span class="number">2</span>; ++i)
+    {
+        <span class="keyword">char</span> c = out[i];
+        out[i] = out[len - <span class="number">1</span> - i];
+        out[len - <span class="number">1</span> - i] = c;
+    }
+    out[len] = <span class="string">'\0'</span>;
+}</code></pre></div><p>该构建为 O(n²) 时间、O(n) 存储；使用最小堆可达 O(n log n)。单叶树按深度定义 WPL=0，实际发送单一符号时通常约定编码 0；要区分数学树深度和实际协议的编码约定。</p></article><article class="topic" id="s04-8"><h3>04.8 例题、自测与答案</h3><p><strong>例：</strong>先序 <code>A B D E C F</code>，中序 <code>D B E A C F</code>：根 A，左子树先序 BDE/中序 DBE，右子树先序 CF/中序 CF。后序为 <code>D E B F C A</code>，高度 3，叶子数 3。这棵树不是完全二叉树，因为 C 缺左孩子却有右孩子 F。</p><p><strong>例：</strong>权值 2,3,7,9：合并 2+3=5，5+7=12，9+12=21，WPL=5+12+21=38。</p><p><strong>自测：</strong>①树有 8 个度为 2 的结点，有多少叶子？②为什么中序线索遍历不能无条件走 left？③两个给定结点之一不在树中，原 LCA 代码是否能验证？④如何写第 k 个先序结点？</p><details class="answer"><summary>查看参考答案</summary><p><strong>答案：</strong>①非空二叉树叶子数 9。②left 可能是前驱线索，应检查 ltag。③不能，它假设两点存在；应先查验存在性，或递归返回“已找到个数+候选”。④用先序计数，每访问一个有效结点计数加 1，达到 k 时保存并停止；题目 k 通常从 1 起，空树和 k 越界返回失败。最坏 O(n)，递归栈 O(h)。</p></details></article></section><section class="chapter" id="ch05" aria-labelledby="title-ch05"><div class="chapter-heading"><span>CHAPTER 05</span><h2 id="title-ch05">图：存储、遍历与算法</h2><div class="chapter-subnav"><a href="#s05-1">05.1 考点地图与算法选型</a><a href="#s05-2">05.2 邻接表、邻接矩阵与特殊链式结构</a><a href="#s05-3">05.3 DFS、BFS 与路径恢复</a><a href="#s05-4">05.4 并查集、Kruskal 与 Prim</a><a href="#s05-5">05.5 Dijkstra 与 Floyd</a><a href="#s05-6">05.6 拓扑排序与关键路径</a><a href="#s05-7">05.7 过程例题</a><a href="#s05-8">05.8 自测与参考答案</a></div></div><article class="topic" id="s05-1"><h3>05.1 考点地图与算法选型</h3><div class="table-wrap"><table><thead><tr><th scope="col">问题</th><th scope="col">算法</th><th scope="col">前提</th><th scope="col">本章实现时间</th></tr></thead><tbody><tr><td>可达性、连通分量</td><td>DFS/BFS</td><td>有向图需区分强弱连通</td><td>邻接表 O(V+E)</td></tr><tr><td>无权最短路</td><td>BFS</td><td>每条边代价相同</td><td>O(V+E)</td></tr><tr><td>最小生成树</td><td>Prim</td><td>无向带权连通图</td><td>矩阵版 O(V²)</td></tr><tr><td>最小生成树</td><td>Kruskal+并查集</td><td>无向图，边按权排序</td><td>O(E log E)</td></tr><tr><td>单源最短路</td><td>Dijkstra</td><td>边权非负</td><td>矩阵版 O(V²)</td></tr><tr><td>全源最短路</td><td>Floyd</td><td>允许负边，最短路不受负环影响</td><td>O(V³)</td></tr><tr><td>先后依赖、判有向环</td><td>拓扑排序</td><td>DAG 才能输出全部顶点</td><td>O(V+E)</td></tr><tr><td>AOE 工期与关键活动</td><td>拓扑+逆拓扑</td><td>DAG，活动持续时间非负</td><td>O(V+E)</td></tr></tbody></table></div><p>MST 最小化连通所有顶点的<strong>总边权</strong>；最短路最小化源到目标的路径代价。MST 允许负边。Dijkstra 不允许负边，不能因为“没有负环”就使用它。Floyd 的负环检测见后文。</p></article><article class="topic" id="s05-2"><h3>05.2 邻接表、邻接矩阵与特殊链式结构</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-20" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-20"><span class="keyword">typedef</span> <span class="keyword">struct</span> Arc
+{
+    <span class="keyword">int</span> to, weight;
+    <span class="keyword">struct</span> Arc *next;
+} Arc;
+
+<span class="keyword">typedef</span> <span class="keyword">struct</span>
+{
+    <span class="keyword">int</span> n;
+    <span class="keyword">bool</span> directed;
+    Arc *head[MAXV];
+} Graph;
+
+<span class="keyword">void</span> graph_init(Graph *g, <span class="keyword">int</span> n, <span class="keyword">bool</span> directed)
+{
+    assert(n &gt;= <span class="number">0</span> &amp;&amp; n &lt;= MAXV);
+    g-&gt;n = n;
+    g-&gt;directed = directed;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)
+    {
+        g-&gt;head[i] = <span class="keyword">NULL</span>;
+    }
+}
+
+<span class="keyword">void</span> arc_add(Graph *g, <span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> w)
+{
+    Arc *p = xmalloc(<span class="keyword">sizeof</span> *p);
+    p-&gt;to = v;
+    p-&gt;weight = w;
+    p-&gt;next = g-&gt;head[u];
+    g-&gt;head[u] = p;
+}
+
+<span class="comment">/* 顶点下标合法；教学示例默认简单图，不输入重复边和自环。 */</span>
+<span class="keyword">void</span> edge_add(Graph *g, <span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> w)
+{
+    assert(u &gt;= <span class="number">0</span> &amp;&amp; u &lt; g-&gt;n &amp;&amp; v &gt;= <span class="number">0</span> &amp;&amp; v &lt; g-&gt;n);
+    arc_add(g, u, v, w);
+    <span class="keyword">if</span> (!g-&gt;directed)
+    {
+        arc_add(g, v, u, w);
+    }
+}
+
+<span class="keyword">void</span> graph_destroy(Graph *g)
+{
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g-&gt;n; ++i)
+    {
+        Arc *p = g-&gt;head[i];
+        <span class="keyword">while</span> (p)
+        {
+            Arc *q = p-&gt;next;
+            free(p);
+            p = q;
+        }
+        g-&gt;head[i] = <span class="keyword">NULL</span>;
+    }
+}
+
+<span class="keyword">typedef</span> <span class="keyword">struct</span>
+{
+    <span class="keyword">int</span> n;
+    <span class="keyword">int</span> w[MAXV][MAXV];
+} Matrix;
+
+<span class="keyword">void</span> to_matrix(<span class="keyword">const</span> Graph *g, Matrix *m)
+{
+    m-&gt;n = g-&gt;n;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g-&gt;n; ++i)
+    {
+        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; g-&gt;n; ++j)
+        {
+            m-&gt;w[i][j] = i == j ? <span class="number">0</span> : INF;
+        }
+    }
+    <span class="keyword">for</span> (<span class="keyword">int</span> u = <span class="number">0</span>; u &lt; g-&gt;n; ++u)
+    {
+        <span class="keyword">for</span> (Arc *p = g-&gt;head[u]; p; p = p-&gt;next)
+        {
+            <span class="keyword">if</span> (p-&gt;weight &lt; m-&gt;w[u][p-&gt;to])
+            {
+                m-&gt;w[u][p-&gt;to] = p-&gt;weight;
+            }
+        }
+    }
+}</code></pre></div><p>邻接矩阵空间 O(V²)，判断两点间是否有边 O(1)；邻接表空间 O(V+E)，枚举某顶点出边 O(outdegree)。无向图一条边通常对应两个弧结点。邻接表头插会使遍历次序与输入次序相反；DFS/BFS 顺序不唯一，题目给出按编号访问时必须按要求排序。</p><p>十字链表用于有向图，一个弧结点含尾/头顶点、同尾下一弧、同头下一弧，可遍历出边和入边；邻接多重表用于无向图，一个边结点由两个端点共享。阅读代码时重点认出“边结点是否共享”和“下一链接按哪个端点走”，删除要同步维护两边链接。本材料给结构识读，未提供这两类结构的完整增删程序。</p></article><article class="topic" id="s05-3"><h3>05.3 DFS、BFS 与路径恢复</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-21" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-21"><span class="keyword">void</span> dfs_visit(<span class="keyword">const</span> Graph *g, <span class="keyword">int</span> u, <span class="keyword">bool</span> seen[], <span class="keyword">int</span> out[], <span class="keyword">int</span> *k)
+{
+    seen[u] = <span class="keyword">true</span>;
+    out[(*k)++] = u;
+    <span class="keyword">for</span> (Arc *p = g-&gt;head[u]; p; p = p-&gt;next)
+    {
+        <span class="keyword">if</span> (!seen[p-&gt;to])
+        {
+            dfs_visit(g, p-&gt;to, seen, out, k);
+        }
+    }
+}
+
+<span class="comment">/* 返回无向图连通分量个数；有向图此计数不表示强连通分量。 */</span>
+<span class="keyword">int</span> dfs_all(<span class="keyword">const</span> Graph *g, <span class="keyword">int</span> out[])
+{
+    <span class="keyword">bool</span> seen[MAXV] = {<span class="keyword">false</span>};
+    <span class="keyword">int</span> k = <span class="number">0</span>, components = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> u = <span class="number">0</span>; u &lt; g-&gt;n; ++u)
+    {
+        <span class="keyword">if</span> (!seen[u])
+        {
+            ++components;
+            dfs_visit(g, u, seen, out, &amp;k);
+        }
+    }
+    <span class="keyword">return</span> components;
+}
+
+<span class="keyword">void</span> bfs_distance(<span class="keyword">const</span> Graph *g, <span class="keyword">int</span> source, <span class="keyword">int</span> dist[], <span class="keyword">int</span> parent[])
+{
+    <span class="keyword">int</span> q[MAXV], f = <span class="number">0</span>, r = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g-&gt;n; ++i)
+    {
+        dist[i] = -<span class="number">1</span>;
+        parent[i] = -<span class="number">1</span>;
+    }
+    dist[source] = <span class="number">0</span>;
+    q[r++] = source;
+    <span class="keyword">while</span> (f &lt; r)
+    {
+        <span class="keyword">int</span> u = q[f++];
+        <span class="keyword">for</span> (Arc *p = g-&gt;head[u]; p; p = p-&gt;next)
+        {
+            <span class="keyword">if</span> (dist[p-&gt;to] == -<span class="number">1</span>)
+            {
+                dist[p-&gt;to] = dist[u] + <span class="number">1</span>;
+                parent[p-&gt;to] = u;
+                q[r++] = p-&gt;to; <span class="comment">/* 入队时标记，避免重复入队。 */</span>
+            }
+        }
+    }
+}
+
+<span class="comment">/* parent形成源点为根的前驱树，输出source到target；不可达返回0。 */</span>
+<span class="keyword">int</span> restore_path(<span class="keyword">int</span> source, <span class="keyword">int</span> target, <span class="keyword">const</span> <span class="keyword">int</span> parent[], <span class="keyword">int</span> path[])
+{
+    <span class="keyword">int</span> n = <span class="number">0</span>, u = target;
+    <span class="keyword">while</span> (u != -<span class="number">1</span> &amp;&amp; n &lt; MAXV)
+    {
+        path[n++] = u;
+        <span class="keyword">if</span> (u == source)
+        {
+            <span class="keyword">break</span>;
+        }
+        u = parent[u];
+    }
+    <span class="keyword">if</span> (n == <span class="number">0</span> || path[n - <span class="number">1</span>] != source)
+    {
+        <span class="keyword">return</span> <span class="number">0</span>;
+    }
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n / <span class="number">2</span>; ++i)
+    {
+        swap_int(&amp;path[i], &amp;path[n - <span class="number">1</span> - i]);
+    }
+    <span class="keyword">return</span> n;
+}</code></pre></div><p>无向图从一个源点开始遍历只能覆盖其连通分量，遍历全部顶点要有外层循环。DFS 调用栈最坏 O(V)，BFS 队列 O(V)。邻接矩阵扫描每个顶点整行，DFS/BFS 时间变成 O(V²)。</p><p>无向图 DFS 判环时忽略父边；有向图不能这样判，应使用未访问/递归栈内/已完成三色状态，遇到指向递归栈内顶点的边有环，或通过拓扑输出数量判断。强连通分量算法属于额外拓展，此处不作完整实现。</p></article><article class="topic" id="s05-4"><h3>05.4 并查集、Kruskal 与 Prim</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-22" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-22"><span class="keyword">typedef</span> <span class="keyword">struct</span>
+{
+    <span class="keyword">int</span> parent[MAXV];
+} DSU;
+
+<span class="keyword">void</span> dsu_init(DSU *d, <span class="keyword">int</span> n)
+{
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)
+    {
+        d-&gt;parent[i] = -<span class="number">1</span>;
+    }
+}
+
+<span class="comment">/* 根处parent为负集合大小；路径压缩。 */</span>
+<span class="keyword">int</span> dsu_find(DSU *d, <span class="keyword">int</span> x)
+{
+    <span class="keyword">if</span> (d-&gt;parent[x] &lt; <span class="number">0</span>)
+    {
+        <span class="keyword">return</span> x;
+    }
+    <span class="keyword">return</span> d-&gt;parent[x] = dsu_find(d, d-&gt;parent[x]);
+}
+
+<span class="keyword">bool</span> dsu_union(DSU *d, <span class="keyword">int</span> a, <span class="keyword">int</span> b)
+{
+    a = dsu_find(d, a);
+    b = dsu_find(d, b);
+    <span class="keyword">if</span> (a == b)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    <span class="keyword">if</span> (d-&gt;parent[a] &gt; d-&gt;parent[b])
+    {
+        swap_int(&amp;a, &amp;b);
+    }
+    d-&gt;parent[a] += d-&gt;parent[b];
+    d-&gt;parent[b] = a;
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+
+<span class="keyword">typedef</span> <span class="keyword">struct</span>
+{
+    <span class="keyword">int</span> u, v, w;
+} Edge;
+
+<span class="keyword">int</span> edge_cmp(<span class="keyword">const</span> <span class="keyword">void</span> *a, <span class="keyword">const</span> <span class="keyword">void</span> *b)
+{
+    <span class="keyword">int</span> x = ((<span class="keyword">const</span> Edge *)a)-&gt;w, y = ((<span class="keyword">const</span> Edge *)b)-&gt;w;
+    <span class="keyword">return</span> (x &gt; y) - (x &lt; y); <span class="comment">/* 不用x-y，避免减法溢出。 */</span>
+}
+
+<span class="comment">/* edges每条无向边仅出现一次；就地排序。连通返回true，total为MST权和。 */</span>
+<span class="keyword">bool</span> kruskal(<span class="keyword">int</span> n, Edge edges[], <span class="keyword">int</span> e, <span class="keyword">int</span> *total)
+{
+    DSU d;
+    dsu_init(&amp;d, n);
+    qsort(edges, (<span class="keyword">size_t</span>)e, <span class="keyword">sizeof</span> *edges, edge_cmp);
+    <span class="keyword">int</span> count = <span class="number">0</span>;
+    *total = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; e &amp;&amp; count &lt; n - <span class="number">1</span>; ++i)
+    {
+        <span class="keyword">if</span> (dsu_union(&amp;d, edges[i].u, edges[i].v))
+        {
+            ++count;
+            *total += edges[i].w;
+        }
+    }
+    <span class="keyword">return</span> n == <span class="number">0</span> || count == n - <span class="number">1</span>;
+}
+
+<span class="comment">/* 非空无向图；失败表示不连通，total此时只是已选部分。 */</span>
+<span class="keyword">bool</span> prim(<span class="keyword">const</span> Matrix *g, <span class="keyword">int</span> *total)
+{
+    <span class="keyword">if</span> (g-&gt;n == <span class="number">0</span>)
+    {
+        *total = <span class="number">0</span>;
+        <span class="keyword">return</span> <span class="keyword">true</span>;
+    }
+    <span class="keyword">bool</span> used[MAXV] = {<span class="keyword">false</span>};
+    <span class="keyword">int</span> low[MAXV];
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g-&gt;n; ++i)
+    {
+        low[i] = INF;
+    }
+    low[<span class="number">0</span>] = <span class="number">0</span>;
+    *total = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; g-&gt;n; ++k)
+    {
+        <span class="keyword">int</span> u = -<span class="number">1</span>;
+        <span class="keyword">for</span> (<span class="keyword">int</span> v = <span class="number">0</span>; v &lt; g-&gt;n; ++v)
+        {
+            <span class="keyword">if</span> (!used[v] &amp;&amp; (u == -<span class="number">1</span> || low[v] &lt; low[u]))
+            {
+                u = v;
+            }
+        }
+        <span class="keyword">if</span> (u == -<span class="number">1</span> || low[u] == INF)
+        {
+            <span class="keyword">return</span> <span class="keyword">false</span>;
+        }
+        used[u] = <span class="keyword">true</span>;
+        *total += low[u];
+        <span class="keyword">for</span> (<span class="keyword">int</span> v = <span class="number">0</span>; v &lt; g-&gt;n; ++v)
+        {
+            <span class="keyword">if</span> (!used[v] &amp;&amp; g-&gt;w[u][v] &lt; low[v])
+            {
+                low[v] = g-&gt;w[u][v];
+            }
+        }
+    }
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}</code></pre></div><p>Prim 的 low[v] 是 v 到<strong>已选顶点集合</strong>的最小边权，更新式是 <code>low[v]=w[u][v]</code>；Dijkstra 的 dist[v] 是源到 v 的路径长度，更新式要加 dist[u]。并查集合并按集合大小、查找做路径压缩，操作序列的均摊复杂度接近 O(1)，严谨写 O(α(V))；不把单次最坏等同均摊。</p></article><article class="topic" id="s05-5"><h3>05.5 Dijkstra 与 Floyd</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-23" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-23"><span class="comment">/* 前提：边权非负；source合法。parent用于恢复路径。 */</span>
+<span class="keyword">void</span> dijkstra(<span class="keyword">const</span> Matrix *g, <span class="keyword">int</span> source, <span class="keyword">int</span> dist[], <span class="keyword">int</span> parent[])
+{
+    <span class="keyword">bool</span> done[MAXV] = {<span class="keyword">false</span>};
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g-&gt;n; ++i)
+    {
+        dist[i] = INF;
+        parent[i] = -<span class="number">1</span>;
+    }
+    dist[source] = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; g-&gt;n; ++k)
+    {
+        <span class="keyword">int</span> u = -<span class="number">1</span>;
+        <span class="keyword">for</span> (<span class="keyword">int</span> v = <span class="number">0</span>; v &lt; g-&gt;n; ++v)
+        {
+            <span class="keyword">if</span> (!done[v] &amp;&amp; (u == -<span class="number">1</span> || dist[v] &lt; dist[u]))
+            {
+                u = v;
+            }
+        }
+        <span class="keyword">if</span> (u == -<span class="number">1</span> || dist[u] == INF)
+        {
+            <span class="keyword">break</span>;
+        }
+        done[u] = <span class="keyword">true</span>;
+        <span class="keyword">for</span> (<span class="keyword">int</span> v = <span class="number">0</span>; v &lt; g-&gt;n; ++v)
+        {
+            <span class="keyword">if</span> (!done[v] &amp;&amp; g-&gt;w[u][v] != INF &amp;&amp; dist[u] + g-&gt;w[u][v] &lt; dist[v])
+            {
+                dist[v] = dist[u] + g-&gt;w[u][v];
+                parent[v] = u;
+            }
+        }
+    }
+}
+
+<span class="comment">/* 原地更新矩阵。返回false表示存在负环，此时不能解释为普通最短路。 */</span>
+<span class="keyword">bool</span> floyd(Matrix *g)
+{
+    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; g-&gt;n; ++k)
+    {
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g-&gt;n; ++i)
+        {
+            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; g-&gt;n; ++j)
+            {
+                <span class="keyword">if</span> (g-&gt;w[i][k] != INF &amp;&amp; g-&gt;w[k][j] != INF &amp;&amp; g-&gt;w[i][k] + g-&gt;w[k][j] &lt; g-&gt;w[i][j])
+                {
+                    g-&gt;w[i][j] = g-&gt;w[i][k] + g-&gt;w[k][j];
+                }
+            }
+        }
+    }
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g-&gt;n; ++i)
+    {
+        <span class="keyword">if</span> (g-&gt;w[i][i] &lt; <span class="number">0</span>)
+        {
+            <span class="keyword">return</span> <span class="keyword">false</span>;
+        }
+    }
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}</code></pre></div><p>Floyd 不变量：第 k 轮后，允许编号≤k 的顶点作为中间点。<strong>k 必须最外层</strong>。无穷值不参与加法；本教学实现还假定算法中的有限权和均不溢出。若负环可达，受影响点对没有有限最短路，不能只看到某个负数结果就当答案。</p></article><article class="topic" id="s05-6"><h3>05.6 拓扑排序与关键路径</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-24" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-24"><span class="comment">/* 有向图；order输出拓扑序；只用局部入度，不破坏图。 */</span>
+<span class="keyword">bool</span> topo_sort(<span class="keyword">const</span> Graph *g, <span class="keyword">int</span> order[])
+{
+    <span class="keyword">int</span> degree[MAXV] = {<span class="number">0</span>}, q[MAXV], f = <span class="number">0</span>, r = <span class="number">0</span>, count = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> u = <span class="number">0</span>; u &lt; g-&gt;n; ++u)
+    {
+        <span class="keyword">for</span> (Arc *p = g-&gt;head[u]; p; p = p-&gt;next)
+        {
+            ++degree[p-&gt;to];
+        }
+    }
+    <span class="keyword">for</span> (<span class="keyword">int</span> u = <span class="number">0</span>; u &lt; g-&gt;n; ++u)
+    {
+        <span class="keyword">if</span> (degree[u] == <span class="number">0</span>)
+        {
+            q[r++] = u;
+        }
+    }
+    <span class="keyword">while</span> (f &lt; r)
+    {
+        <span class="keyword">int</span> u = q[f++];
+        order[count++] = u;
+        <span class="keyword">for</span> (Arc *p = g-&gt;head[u]; p; p = p-&gt;next)
+        {
+            <span class="keyword">if</span> (--degree[p-&gt;to] == <span class="number">0</span>)
+            {
+                q[r++] = p-&gt;to;
+            }
+        }
+    }
+    <span class="keyword">return</span> count == g-&gt;n;
+}
+
+<span class="comment">/* 非负权DAG；多源/多汇等价于增加持续时间0的超级源/汇。
+   工期为所有汇点最早时间最大值；vl以统一工期初始化。 */</span>
+<span class="keyword">bool</span> critical_times(<span class="keyword">const</span> Graph *g, <span class="keyword">int</span> ve[], <span class="keyword">int</span> vl[], <span class="keyword">int</span> *duration)
+{
+    <span class="keyword">int</span> order[MAXV];
+    <span class="keyword">if</span> (!topo_sort(g, order))
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; g-&gt;n; ++i)
+    {
+        ve[i] = <span class="number">0</span>;
+    }
+    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; g-&gt;n; ++k)
+    {
+        <span class="keyword">int</span> u = order[k];
+        <span class="keyword">for</span> (Arc *p = g-&gt;head[u]; p; p = p-&gt;next)
+        {
+            <span class="keyword">if</span> (ve[u] + p-&gt;weight &gt; ve[p-&gt;to])
+            {
+                ve[p-&gt;to] = ve[u] + p-&gt;weight;
+            }
+        }
+    }
+    *duration = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> u = <span class="number">0</span>; u &lt; g-&gt;n; ++u)
+    {
+        <span class="keyword">if</span> (!g-&gt;head[u] &amp;&amp; ve[u] &gt; *duration)
+        {
+            *duration = ve[u];
+        }
+    }
+    <span class="keyword">for</span> (<span class="keyword">int</span> u = <span class="number">0</span>; u &lt; g-&gt;n; ++u)
+    {
+        vl[u] = *duration;
+    }
+    <span class="keyword">for</span> (<span class="keyword">int</span> k = g-&gt;n - <span class="number">1</span>; k &gt;= <span class="number">0</span>; --k)
+    {
+        <span class="keyword">int</span> u = order[k];
+        <span class="keyword">for</span> (Arc *p = g-&gt;head[u]; p; p = p-&gt;next)
+        {
+            <span class="keyword">if</span> (vl[p-&gt;to] - p-&gt;weight &lt; vl[u])
+            {
+                vl[u] = vl[p-&gt;to] - p-&gt;weight;
+            }
+        }
+    }
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+
+<span class="comment">/* 活动u-&gt;v的最早开始ve[u]，最迟开始vl[v]-w；相等则为关键活动。 */</span></code></pre></div><p>拓扑排序 O(V+E)，结果通常不唯一；出现多个当前零入度点意味着可有多种选择。关键路径是持续时间最长的源汇路径，可能不唯一。缩短一条关键活动不一定缩短总工期，其他关键路径可能保持原工期；非关键活动延长在其时差以内通常不改变工期。</p></article><article class="topic" id="s05-7"><h3>05.7 过程例题</h3><p><strong>无向带权图：</strong>边 0-1:2、0-2:5、1-2:1、1-3:4、2-3:2。Kruskal 依次选 1-2:1、0-1:2、2-3:2，总权 5。0 到各点最短距离为 <code>[0,2,3,5]</code>，到 3 的路径为 0→1→2→3。BFS 若忽略权值，到 3 只需 2 条边；它与权值最短路不是同一问题。</p><p><strong>AOE：</strong>0→1:3、0→2:2、1→3:2、2→3:4。ve=<code>[0,3,2,6]</code>，vl=<code>[0,4,2,6]</code>，工期 6，关键活动是 0→2、2→3。0→1 的最早开始 0，最迟开始 1，时差 1。</p></article><article class="topic" id="s05-8"><h3>05.8 自测与参考答案</h3><ol><li>BFS 为什么要在入队时标记？答：否则多个前驱会把同一顶点重复入队，破坏“一点一次”的队列容量与代价分析。</li><li>Prim 能否使用边权 0 或负权？答：能；用 used 标记是否入树，不能用 low==0 代替。图必须无向，完整 MST 要求连通。</li><li>有向图 0→1:-2、1→2:3、0→2:2，能否用本章 Dijkstra？答：不满足非负权前提，应改用适合负权的算法，如 Bellman-Ford，或 DAG 的拓扑松弛。</li><li>拓扑只输出 V-1 个顶点说明什么？答：存在有向环，剩余顶点不一定全部位于环上，也可能只是被环上的依赖阻塞。</li><li>图不连通时 Kruskal 的已选边是什么？答：最小生成森林的一部分/结果，选边数为 V-c（c 为分量数）；不能报告为完整 MST。上述函数返回 false，输出权和只表示已选森林。</li></ol></article></section><section class="chapter" id="ch06" aria-labelledby="title-ch06"><div class="chapter-heading"><span>CHAPTER 06</span><h2 id="title-ch06">查找</h2><div class="chapter-subnav"><a href="#s06-1">06.1 查找方法、成功失败与 ASL</a><a href="#s06-2">06.2 顺序、折半与边界查找</a><a href="#s06-3">06.3 BST：查找、插入与三类删除</a><a href="#s06-4">06.4 AVL：高度、四种失衡与插入</a><a href="#s06-5">06.5 红黑树：性质与插入过程追踪</a><a href="#s06-6">06.6 B 树与 B+ 树：规则与查找代码</a><a href="#s06-7">06.7 散列表：线性探测与墓碑</a><a href="#s06-8">06.8 例题、自测与答案</a></div></div><article class="topic" id="s06-1"><h3>06.1 查找方法、成功失败与 ASL</h3><div class="table-wrap"><table><thead><tr><th scope="col">方法</th><th scope="col">条件</th><th scope="col">查找时间</th><th scope="col">关键考点</th></tr></thead><tbody><tr><td>顺序查找</td><td>可无序</td><td>O(n)</td><td>哨兵、成功/失败比较次数</td></tr><tr><td>折半查找</td><td>有序、可随机访问</td><td>O(log n)</td><td>区间定义、边界、判定树</td></tr><tr><td>分块查找</td><td>块间有序，块内可无序</td><td>依索引与块大小</td><td>先定位块再顺序查找</td></tr><tr><td>BST</td><td>左小右大</td><td>O(h)，最坏 O(n)</td><td>删除、退化树</td></tr><tr><td>AVL、红黑树</td><td>平衡约束</td><td>O(log n)</td><td>旋转、性质与维护规则</td></tr><tr><td>B/B+树</td><td>多路平衡</td><td>O(log n)量级，重点看磁盘层数</td><td>分裂、借位、合并、叶链</td></tr><tr><td>散列</td><td>良好散列与合适装填因子</td><td>期望 O(1)，最坏 O(n)</td><td>冲突、探测、删除标记</td></tr></tbody></table></div><p>ASL 是按查找概率加权的比较次数均值：成功 <code>Σp_i*C_i</code>，失败按各失败位置的概率单独计算。等概率成功顺序查找 ASL=(n+1)/2；折半查找应画实际判定树计数，<strong>不能一律把成功 ASL 写成 log2 n</strong>。</p></article><article class="topic" id="s06-2"><h3>06.2 顺序、折半与边界查找</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-25" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-25"><span class="keyword">int</span> sequential_find(<span class="keyword">const</span> <span class="keyword">int</span> a[], <span class="keyword">int</span> n, <span class="keyword">int</span> key)
+{
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)
+    {
+        <span class="keyword">if</span> (a[i] == key)
+        {
+            <span class="keyword">return</span> i;
+        }
+    }
+    <span class="keyword">return</span> -<span class="number">1</span>;
+}
+
+<span class="comment">/* 闭区间[low,high]；存在重复值时返回其中任意一个。 */</span>
+<span class="keyword">int</span> binary_find(<span class="keyword">const</span> <span class="keyword">int</span> a[], <span class="keyword">int</span> n, <span class="keyword">int</span> key)
+{
+    <span class="keyword">int</span> low = <span class="number">0</span>, high = n - <span class="number">1</span>;
+    <span class="keyword">while</span> (low &lt;= high)
+    {
+        <span class="keyword">int</span> mid = low + (high - low) / <span class="number">2</span>;
+        <span class="keyword">if</span> (a[mid] == key)
+        {
+            <span class="keyword">return</span> mid;
+        }
+        <span class="keyword">if</span> (a[mid] &lt; key)
+        {
+            low = mid + <span class="number">1</span>;
+        }
+        <span class="keyword">else</span>
+        {
+            high = mid - <span class="number">1</span>;
+        }
+    }
+    <span class="keyword">return</span> -<span class="number">1</span>;
+}
+
+<span class="comment">/* 半开区间[low,high)，返回第一个&gt;=key的位置，可能为n。 */</span>
+<span class="keyword">int</span> lower_bound_c(<span class="keyword">const</span> <span class="keyword">int</span> a[], <span class="keyword">int</span> n, <span class="keyword">int</span> key)
+{
+    <span class="keyword">int</span> low = <span class="number">0</span>, high = n;
+    <span class="keyword">while</span> (low &lt; high)
+    {
+        <span class="keyword">int</span> mid = low + (high - low) / <span class="number">2</span>;
+        <span class="keyword">if</span> (a[mid] &lt; key)
+        {
+            low = mid + <span class="number">1</span>;
+        }
+        <span class="keyword">else</span>
+        {
+            high = mid;
+        }
+    }
+    <span class="keyword">return</span> low;
+}
+
+<span class="comment">/* 返回第一个&gt;key的位置。 */</span>
+<span class="keyword">int</span> upper_bound_c(<span class="keyword">const</span> <span class="keyword">int</span> a[], <span class="keyword">int</span> n, <span class="keyword">int</span> key)
+{
+    <span class="keyword">int</span> low = <span class="number">0</span>, high = n;
+    <span class="keyword">while</span> (low &lt; high)
+    {
+        <span class="keyword">int</span> mid = low + (high - low) / <span class="number">2</span>;
+        <span class="keyword">if</span> (a[mid] &lt;= key)
+        {
+            low = mid + <span class="number">1</span>;
+        }
+        <span class="keyword">else</span>
+        {
+            high = mid;
+        }
+    }
+    <span class="keyword">return</span> low;
+}
+
+<span class="comment">/* 块间有序：前一块所有键&lt;后一块所有键；max为块内最大值。
+   start/end是各块在数组中的闭区间，块内可无序。 */</span>
+<span class="keyword">typedef</span> <span class="keyword">struct</span>
+{
+    <span class="keyword">int</span> max, start, end;
+} Block;
+
+<span class="keyword">int</span> block_find(<span class="keyword">const</span> <span class="keyword">int</span> a[], <span class="keyword">const</span> Block b[], <span class="keyword">int</span> blocks, <span class="keyword">int</span> key)
+{
+    <span class="keyword">int</span> low = <span class="number">0</span>, high = blocks;
+    <span class="keyword">while</span> (low &lt; high)
+    {
+        <span class="keyword">int</span> mid = low + (high - low) / <span class="number">2</span>;
+        <span class="keyword">if</span> (b[mid].max &lt; key)
+        {
+            low = mid + <span class="number">1</span>;
+        }
+        <span class="keyword">else</span>
+        {
+            high = mid;
+        }
+    }
+    <span class="keyword">if</span> (low == blocks)
+    {
+        <span class="keyword">return</span> -<span class="number">1</span>;
+    }
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = b[low].start; i &lt;= b[low].end; ++i)
+    {
+        <span class="keyword">if</span> (a[i] == key)
+        {
+            <span class="keyword">return</span> i;
+        }
+    }
+    <span class="keyword">return</span> -<span class="number">1</span>;
+}</code></pre></div><p>非降序数组中 key 的个数为 <code>upper_bound-lower_bound</code>；查首个 key 时，lower 返回的位置还要检查 <code>&lt;n &amp;&amp; a[pos]==key</code>。哨兵顺序查找需要额外/可覆盖的存储槽；不应直接覆盖有效元素却不恢复。</p><p>分块若顺序查索引，b 块、块长 s，等概率成功平均比较约为 <code>(b+1)/2+(s+1)/2</code>（假设各块等长等概率），n=bs 时 s 取约√n 可平衡两段代价；若索引用折半，则代价模型变成 O(log b+s)，不能照搬同一最优块长结论。</p></article><article class="topic" id="s06-3"><h3>06.3 BST：查找、插入与三类删除</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-26" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-26"><span class="keyword">typedef</span> <span class="keyword">struct</span> BST
+{
+    <span class="keyword">int</span> key;
+    <span class="keyword">struct</span> BST *left, *right;
+} BST;
+
+BST *bst_new(<span class="keyword">int</span> key)
+{
+    BST *t = xmalloc(<span class="keyword">sizeof</span> *t);
+    t-&gt;key = key;
+    t-&gt;left = t-&gt;right = <span class="keyword">NULL</span>;
+    <span class="keyword">return</span> t;
+}
+
+BST *bst_find(BST *t, <span class="keyword">int</span> key)
+{
+    <span class="keyword">while</span> (t &amp;&amp; t-&gt;key != key)
+    {
+        t = key &lt; t-&gt;key ? t-&gt;left : t-&gt;right;
+    }
+    <span class="keyword">return</span> t;
+}
+
+<span class="comment">/* 本例集合不存重复关键字；必须用root=bst_insert(root,key)接新根。 */</span>
+BST *bst_insert(BST *t, <span class="keyword">int</span> key)
+{
+    <span class="keyword">if</span> (!t)
+    {
+        <span class="keyword">return</span> bst_new(key);
+    }
+    <span class="keyword">if</span> (key &lt; t-&gt;key)
+    {
+        t-&gt;left = bst_insert(t-&gt;left, key);
+    }
+    <span class="keyword">else</span> <span class="keyword">if</span> (key &gt; t-&gt;key)
+    {
+        t-&gt;right = bst_insert(t-&gt;right, key);
+    }
+    <span class="keyword">return</span> t;
+}
+
+BST *bst_erase(BST *t, <span class="keyword">int</span> key)
+{
+    <span class="keyword">if</span> (!t)
+    {
+        <span class="keyword">return</span> <span class="keyword">NULL</span>;
+    }
+    <span class="keyword">if</span> (key &lt; t-&gt;key)
+    {
+        t-&gt;left = bst_erase(t-&gt;left, key);
+    }
+    <span class="keyword">else</span> <span class="keyword">if</span> (key &gt; t-&gt;key)
+    {
+        t-&gt;right = bst_erase(t-&gt;right, key);
+    }
+    <span class="keyword">else</span>
+    {
+        <span class="keyword">if</span> (!t-&gt;left || !t-&gt;right)
+        {
+            BST *child = t-&gt;left ? t-&gt;left : t-&gt;right;
+            free(t);
+            <span class="keyword">return</span> child;
+        }
+        BST *s = t-&gt;right;
+        <span class="keyword">while</span> (s-&gt;left)
+        {
+            s = s-&gt;left;
+        }
+        t-&gt;key = s-&gt;key;
+        t-&gt;right = bst_erase(t-&gt;right, s-&gt;key);
+    }
+    <span class="keyword">return</span> t;
+}
+
+<span class="keyword">void</span> bst_destroy(BST *t)
+{
+    <span class="keyword">if</span> (!t)
+    {
+        <span class="keyword">return</span>;
+    }
+    bst_destroy(t-&gt;left);
+    bst_destroy(t-&gt;right);
+    free(t);
+}</code></pre></div><p>删除：叶结点直接断开；一个孩子时孩子顶替；两个孩子时用中序前驱或后继替换关键字，再删除替身。若结点还有记录字段，需要一起复制；本例只存 key。BST 中序有序，但高度不保证对数，递增序列插入会形成链。</p></article><article class="topic" id="s06-4"><h3>06.4 AVL：高度、四种失衡与插入</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-27" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-27"><span class="keyword">typedef</span> <span class="keyword">struct</span> AVL
+{
+    <span class="keyword">int</span> key, h;
+    <span class="keyword">struct</span> AVL *left, *right;
+} AVL;
+
+<span class="keyword">int</span> avl_h(AVL *t)
+{
+    <span class="keyword">return</span> t ? t-&gt;h : <span class="number">0</span>;
+}
+
+<span class="keyword">void</span> avl_update(AVL *t)
+{
+    <span class="keyword">int</span> l = avl_h(t-&gt;left), r = avl_h(t-&gt;right);
+    t-&gt;h = <span class="number">1</span> + (l &gt; r ? l : r);
+}
+
+AVL *rotate_right(AVL *y)
+{
+    AVL *x = y-&gt;left, *middle = x-&gt;right;
+    x-&gt;right = y;
+    y-&gt;left = middle;
+    avl_update(y);
+    avl_update(x);
+    <span class="keyword">return</span> x; <span class="comment">/* 先更新旧根。 */</span>
+}
+
+AVL *rotate_left(AVL *x)
+{
+    AVL *y = x-&gt;right, *middle = y-&gt;left;
+    y-&gt;left = x;
+    x-&gt;right = middle;
+    avl_update(x);
+    avl_update(y);
+    <span class="keyword">return</span> y;
+}
+
+AVL *avl_insert(AVL *t, <span class="keyword">int</span> key)
+{
+    <span class="keyword">if</span> (!t)
+    {
+        AVL *p = xmalloc(<span class="keyword">sizeof</span> *p);
+        *p = (AVL){key, <span class="number">1</span>, <span class="keyword">NULL</span>, <span class="keyword">NULL</span>};
+        <span class="keyword">return</span> p;
+    }
+    <span class="keyword">if</span> (key &lt; t-&gt;key)
+    {
+        t-&gt;left = avl_insert(t-&gt;left, key);
+    }
+    <span class="keyword">else</span> <span class="keyword">if</span> (key &gt; t-&gt;key)
+    {
+        t-&gt;right = avl_insert(t-&gt;right, key);
+    }
+    <span class="keyword">else</span>
+    {
+        <span class="keyword">return</span> t;
+    }
+    avl_update(t);
+    <span class="keyword">int</span> balance = avl_h(t-&gt;left) - avl_h(t-&gt;right);
+    <span class="keyword">if</span> (balance &gt; <span class="number">1</span>)
+    {
+        <span class="keyword">if</span> (key &gt; t-&gt;left-&gt;key)
+        {
+            t-&gt;left = rotate_left(t-&gt;left); <span class="comment">/* LR。 */</span>
+        }
+        <span class="keyword">return</span> rotate_right(t); <span class="comment">/* LL或LR的第二步。 */</span>
+    }
+    <span class="keyword">if</span> (balance &lt; -<span class="number">1</span>)
+    {
+        <span class="keyword">if</span> (key &lt; t-&gt;right-&gt;key)
+        {
+            t-&gt;right = rotate_right(t-&gt;right); <span class="comment">/* RL。 */</span>
+        }
+        <span class="keyword">return</span> rotate_left(t); <span class="comment">/* RR或RL的第二步。 */</span>
+    }
+    <span class="keyword">return</span> t;
+}
+
+<span class="keyword">void</span> avl_destroy(AVL *t)
+{
+    <span class="keyword">if</span> (!t)
+    {
+        <span class="keyword">return</span>;
+    }
+    avl_destroy(t-&gt;left);
+    avl_destroy(t-&gt;right);
+    free(t);
+}</code></pre></div><p>平衡因子定义为左高-右高。LL：右旋；RR：左旋；LR：先左旋左孩子，再右旋根；RL：先右旋右孩子，再左旋根。旋转保持中序顺序。插入 O(log n)，递归空间 O(log n)；<strong>删除维护需沿祖先继续检查，不能直接套用按插入 key 判断失衡的代码</strong>。</p><p>删除先做 BST 删除，再更新高度、按<strong>孩子当前平衡因子</strong>选择旋转。一次删除可能使多个祖先失衡，需要沿递归返回路径持续维护。</p><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-28" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-28">AVL *avl_erase(AVL *t, <span class="keyword">int</span> key)
+{
+    <span class="keyword">if</span> (!t)
+    {
+        <span class="keyword">return</span> <span class="keyword">NULL</span>;
+    }
+    <span class="keyword">if</span> (key &lt; t-&gt;key)
+    {
+        t-&gt;left = avl_erase(t-&gt;left, key);
+    }
+    <span class="keyword">else</span> <span class="keyword">if</span> (key &gt; t-&gt;key)
+    {
+        t-&gt;right = avl_erase(t-&gt;right, key);
+    }
+    <span class="keyword">else</span>
+    {
+        <span class="keyword">if</span> (!t-&gt;left || !t-&gt;right)
+        {
+            AVL *child = t-&gt;left ? t-&gt;left : t-&gt;right;
+            free(t);
+            <span class="keyword">return</span> child;
+        }
+        AVL *s = t-&gt;right;
+        <span class="keyword">while</span> (s-&gt;left)
+        {
+            s = s-&gt;left;
+        }
+        t-&gt;key = s-&gt;key;
+        t-&gt;right = avl_erase(t-&gt;right, s-&gt;key);
+    }
+    avl_update(t);
+    <span class="keyword">int</span> balance = avl_h(t-&gt;left) - avl_h(t-&gt;right);
+    <span class="keyword">if</span> (balance &gt; <span class="number">1</span>)
+    {
+        <span class="keyword">if</span> (avl_h(t-&gt;left-&gt;left) &lt; avl_h(t-&gt;left-&gt;right))
+        {
+            t-&gt;left = rotate_left(t-&gt;left);
+        }
+        <span class="keyword">return</span> rotate_right(t);
+    }
+    <span class="keyword">if</span> (balance &lt; -<span class="number">1</span>)
+    {
+        <span class="keyword">if</span> (avl_h(t-&gt;right-&gt;right) &lt; avl_h(t-&gt;right-&gt;left))
+        {
+            t-&gt;right = rotate_right(t-&gt;right);
+        }
+        <span class="keyword">return</span> rotate_left(t);
+    }
+    <span class="keyword">return</span> t;
+}</code></pre></div><p>孩子平衡因子为 0 的情况会在删除中出现，此时选择单旋。删除时间与递归空间均 O(log n)。调用者同样需要 <code>root=avl_erase(root,key)</code>。</p></article><article class="topic" id="s06-5"><h3>06.5 红黑树：性质与插入过程追踪</h3><p>红黑树是满足以下约束的 BST：结点红或黑；根黑；空叶 NIL 黑；红结点的孩子都黑；从任一结点到后代 NIL 的各条路径包含相同数量的黑结点。计黑高时应先说明是否包含起点和 NIL，并全程一致。按边数计算的树高满足 <code>h≤2log2(n+1)</code>。</p><p>插入的结构化流程：先按 BST 插入<strong>红结点</strong>，再修复。若父黑直接结束；若父红且叔红，把父叔变黑、祖父变红，继续向上；若父红叔黑/NIL，按内侧/外侧情况先旋转到外侧，再旋转祖父并交换父祖颜色；最后根改黑。左右情况镜像对称。</p><p><strong>过程例：</strong>依次插 10、5、1：10 为黑根；5 红；1 红导致父红叔黑，是外侧 LL，于 10 右旋并重染色，结果 5 黑根、1 和 10 红。插 15 时父 10 与叔 1 均红，先变父叔黑、祖父 5 红，最后根 5 改黑。</p><p>删除要追踪被实际移除结点的原颜色及黑高缺口；红结点移除通常无需黑高修复，黑结点移除可能需要借助兄弟、侄结点旋转重染色。本材料以性质和过程判断为目标，<strong>未提供红黑树完整插删程序</strong>，不应把 AVL 的四个分支当作红黑树修复代码。</p><p>用 x 表示承担黑高缺口的替代位置。若 x 在父结点左侧，兄弟 w 在右侧，可按下表追踪；右侧情形左右镜像。近侄是 w 的左孩子，远侄是 w 的右孩子，NIL 视为黑。</p><div class="table-wrap"><table><thead><tr><th scope="col">情况</th><th scope="col">调整与后续</th></tr></thead><tbody><tr><td>x 为红</td><td>把 x 变黑，吸收缺口，结束</td></tr><tr><td>兄弟红</td><td>兄弟变黑、父变红、左旋父，转换为黑兄弟情况</td></tr><tr><td>兄弟黑、两个侄子均黑</td><td>兄弟变红，缺口上移到父；父原为红时可染黑结束</td></tr><tr><td>兄弟黑、近侄红、远侄黑</td><td>近侄染黑、兄弟染红、右旋兄弟，转换成远侄红</td></tr><tr><td>兄弟黑、远侄红</td><td>兄弟继承父颜色，父与远侄染黑，左旋父，结束</td></tr></tbody></table></div><p>这些是经典红黑树删除修复的状态规则，具体代码还要统一哨兵 NIL、双亲指针与根更新，不能省略这些约定后机械翻译。</p></article><article class="topic" id="s06-6"><h3>06.6 B 树与 B+ 树：规则与查找代码</h3><p>本节采用 <strong>m 阶 B 树=每个结点最多 m 个孩子</strong> 的教材约定。一个内部结点若有 k 个关键字就有 k+1 个孩子；非根至少 <code>⌈m/2⌉-1</code> 个关键字，至多 m-1 个；非叶根至少 2 个孩子；所有叶结点在同一层。空树根可为空，单结点树另算。</p><p>插入先到应在的叶子插入关键字；超过 m-1 后分裂，把中间关键字上移，左右各保留一部分；父结点也可能连锁分裂，根分裂会增高。删除内部关键字可换前驱/后继；删除后下溢，优先向足够多关键字的相邻兄弟借，并通过父关键字转移；兄弟不能借则合并，父可能继续下溢，根无键时高度下降。</p><p><strong>3 阶 B 树例：</strong>依次插 10、20、30，叶 <code>[10,20,30]</code> 溢出，中键 20 上升成为根，孩子为 <code>[10]</code>、<code>[30]</code>。再插 40、50，右叶溢出，中键 40 上升，根为 <code>[20,40]</code>，孩子 <code>[10] [30] [50]</code>。删除 30 时左右兄弟都处于最少键数，将父中键 20 下移，与左兄弟合并成 <code>[10,20]</code>，根余 <code>[40]</code>，另一孩子 <code>[50]</code>。</p><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-29" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-29"><span class="preproc">#define BT_ORDER 5</span>
+
+<span class="keyword">typedef</span> <span class="keyword">struct</span> BTreeNode
+{
+    <span class="keyword">int</span> n, key[BT_ORDER - <span class="number">1</span>];
+    <span class="keyword">bool</span> leaf;
+    <span class="keyword">struct</span> BTreeNode *child[BT_ORDER];
+} BTreeNode;
+
+<span class="comment">/* 仅演示合法B树的查找；slot返回在命中结点内的位置。 */</span>
+BTreeNode *btree_find(BTreeNode *t, <span class="keyword">int</span> key, <span class="keyword">int</span> *slot)
+{
+    <span class="keyword">while</span> (t)
+    {
+        <span class="keyword">int</span> i = <span class="number">0</span>;
+        <span class="keyword">while</span> (i &lt; t-&gt;n &amp;&amp; key &gt; t-&gt;key[i])
+        {
+            ++i;
+        }
+        <span class="keyword">if</span> (i &lt; t-&gt;n &amp;&amp; key == t-&gt;key[i])
+        {
+            *slot = i;
+            <span class="keyword">return</span> t;
+        }
+        <span class="keyword">if</span> (t-&gt;leaf)
+        {
+            <span class="keyword">return</span> <span class="keyword">NULL</span>;
+        }
+        t = t-&gt;child[i];
+    }
+    <span class="keyword">return</span> <span class="keyword">NULL</span>;
+}</code></pre></div><p>B+ 树的记录集中在叶结点，叶结点有序链接，适合区间扫描。教材对“阶”“内部索引键数量”“分隔键取最大/最小”的定义可能不同，先认题目约定。<strong>本节 B+ 查找采用内部每个孩子配一个该子树最大键的约定</strong>，即有 k 个孩子就存 k 个最大键；与上面的 B 树“k 键 k+1 孩子”不同。</p><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-30" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-30"><span class="keyword">typedef</span> <span class="keyword">struct</span> BPlus
+{
+    <span class="keyword">int</span> n, key[BT_ORDER];
+    <span class="keyword">bool</span> leaf;
+    <span class="keyword">struct</span> BPlus *child[BT_ORDER], *next;
+} BPlus;
+
+<span class="comment">/* 内部结点key[i]为child[i]子树最大键；命中也必须继续到叶。 */</span>
+BPlus *bplus_find(BPlus *t, <span class="keyword">int</span> key, <span class="keyword">int</span> *slot)
+{
+    <span class="keyword">while</span> (t &amp;&amp; !t-&gt;leaf)
+    {
+        <span class="keyword">int</span> i = <span class="number">0</span>;
+        <span class="keyword">while</span> (i &lt; t-&gt;n &amp;&amp; t-&gt;key[i] &lt; key)
+        {
+            ++i;
+        }
+        <span class="keyword">if</span> (i == t-&gt;n)
+        {
+            <span class="keyword">return</span> <span class="keyword">NULL</span>;
+        }
+        t = t-&gt;child[i];
+    }
+    <span class="keyword">if</span> (!t)
+    {
+        <span class="keyword">return</span> <span class="keyword">NULL</span>;
+    }
+    <span class="keyword">int</span> i = lower_bound_c(t-&gt;key, t-&gt;n, key);
+    <span class="keyword">if</span> (i &lt; t-&gt;n &amp;&amp; t-&gt;key[i] == key)
+    {
+        *slot = i;
+        <span class="keyword">return</span> t;
+    }
+    <span class="keyword">return</span> <span class="keyword">NULL</span>;
+}</code></pre></div><p>B+ 插入叶记录，分裂后叶中仍保留实际记录，向父层更新索引；不能像 B 树那样把记录本身从叶子永久移走。删除也可能借位/合并并更新父索引及叶链。以上只提供 B/B+ <strong>查找函数</strong>及增删过程讲解；没有完整的分裂合并程序。查磁盘块时重点数访问层数，结点内顺序扫描/二分的 CPU 代价另计。</p></article><article class="topic" id="s06-7"><h3>06.7 散列表：线性探测与墓碑</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-31" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-31"><span class="preproc">#define HM 17</span>
+
+<span class="keyword">typedef</span> <span class="keyword">enum</span>
+{
+    EMPTY,
+    USED,
+    DELETED
+} State;
+
+<span class="keyword">typedef</span> <span class="keyword">struct</span>
+{
+    <span class="keyword">int</span> key[HM];
+    State state[HM];
+} Hash;
+
+<span class="keyword">int</span> hash_home(<span class="keyword">int</span> key)
+{
+    <span class="keyword">return</span> (key % HM + HM) % HM;
+}
+
+<span class="keyword">void</span> hash_init(Hash *h)
+{
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; HM; ++i)
+    {
+        h-&gt;state[i] = EMPTY;
+    }
+}
+
+<span class="keyword">int</span> hash_find(<span class="keyword">const</span> Hash *h, <span class="keyword">int</span> key)
+{
+    <span class="keyword">int</span> start = hash_home(key);
+    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; HM; ++k)
+    {
+        <span class="keyword">int</span> i = (start + k) % HM;
+        <span class="keyword">if</span> (h-&gt;state[i] == EMPTY)
+        {
+            <span class="keyword">return</span> -<span class="number">1</span>;
+        }
+        <span class="keyword">if</span> (h-&gt;state[i] == USED &amp;&amp; h-&gt;key[i] == key)
+        {
+            <span class="keyword">return</span> i;
+        }
+    }
+    <span class="keyword">return</span> -<span class="number">1</span>;
+}
+
+<span class="comment">/* 集合语义，已有键视为成功；插入必须探测到EMPTY或整表结束再判重复。 */</span>
+<span class="keyword">bool</span> hash_insert(Hash *h, <span class="keyword">int</span> key)
+{
+    <span class="keyword">int</span> start = hash_home(key), first_deleted = -<span class="number">1</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; HM; ++k)
+    {
+        <span class="keyword">int</span> i = (start + k) % HM;
+        <span class="keyword">if</span> (h-&gt;state[i] == USED &amp;&amp; h-&gt;key[i] == key)
+        {
+            <span class="keyword">return</span> <span class="keyword">true</span>;
+        }
+        <span class="keyword">if</span> (h-&gt;state[i] == DELETED &amp;&amp; first_deleted == -<span class="number">1</span>)
+        {
+            first_deleted = i;
+        }
+        <span class="keyword">if</span> (h-&gt;state[i] == EMPTY)
+        {
+            <span class="keyword">if</span> (first_deleted != -<span class="number">1</span>)
+            {
+                i = first_deleted;
+            }
+            h-&gt;key[i] = key;
+            h-&gt;state[i] = USED;
+            <span class="keyword">return</span> <span class="keyword">true</span>;
+        }
+    }
+    <span class="keyword">if</span> (first_deleted != -<span class="number">1</span>)
+    {
+        h-&gt;key[first_deleted] = key;
+        h-&gt;state[first_deleted] = USED;
+        <span class="keyword">return</span> <span class="keyword">true</span>;
+    }
+    <span class="keyword">return</span> <span class="keyword">false</span>;
+}
+
+<span class="keyword">bool</span> hash_erase(Hash *h, <span class="keyword">int</span> key)
+{
+    <span class="keyword">int</span> i = hash_find(h, key);
+    <span class="keyword">if</span> (i == -<span class="number">1</span>)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    h-&gt;state[i] = DELETED;
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}</code></pre></div><p>删除不直接标 EMPTY，否则同一探测链后续键会被错误判不存在。查找遇 DELETED 继续；遇 EMPTY 可停；整表最多探测 HM 次，避免死循环。墓碑过多会降低性能，需要重建表。装填因子 α=有效元素数/槽数；查找代价还受探测策略、键分布与墓碑影响。</p><p>线性探测会产生聚集。二次探测、双散列需说明公式和能否遍历足够槽位；双散列步长与表长互素可遍历全表。拉链法把同槽键组织成链表，装填因子允许大于 1。</p><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-32" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-32"><span class="keyword">typedef</span> <span class="keyword">struct</span> HLink
+{
+    <span class="keyword">int</span> key;
+    <span class="keyword">struct</span> HLink *next;
+} HLink;
+
+<span class="keyword">typedef</span> <span class="keyword">struct</span>
+{
+    HLink *bucket[HM];
+} ChainHash;
+
+<span class="keyword">void</span> chain_init(ChainHash *h)
+{
+    memset(h, <span class="number">0</span>, <span class="keyword">sizeof</span> *h);
+}
+
+<span class="keyword">bool</span> chain_has(<span class="keyword">const</span> ChainHash *h, <span class="keyword">int</span> key)
+{
+    <span class="keyword">for</span> (HLink *p = h-&gt;bucket[hash_home(key)]; p; p = p-&gt;next)
+    {
+        <span class="keyword">if</span> (p-&gt;key == key)
+        {
+            <span class="keyword">return</span> <span class="keyword">true</span>;
+        }
+    }
+    <span class="keyword">return</span> <span class="keyword">false</span>;
+}
+
+<span class="keyword">void</span> chain_insert(ChainHash *h, <span class="keyword">int</span> key)
+{
+    <span class="keyword">if</span> (chain_has(h, key))
+    {
+        <span class="keyword">return</span>;
+    }
+    <span class="keyword">int</span> k = hash_home(key);
+    HLink *p = xmalloc(<span class="keyword">sizeof</span> *p);
+    p-&gt;key = key;
+    p-&gt;next = h-&gt;bucket[k];
+    h-&gt;bucket[k] = p;
+}
+
+<span class="keyword">bool</span> chain_erase(ChainHash *h, <span class="keyword">int</span> key)
+{
+    HLink **link = &amp;h-&gt;bucket[hash_home(key)];
+    <span class="keyword">while</span> (*link &amp;&amp; (*link)-&gt;key != key)
+    {
+        link = &amp;(*link)-&gt;next;
+    }
+    <span class="keyword">if</span> (!*link)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    HLink *p = *link;
+    *link = p-&gt;next;
+    free(p);
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+
+<span class="keyword">void</span> chain_destroy(ChainHash *h)
+{
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; HM; ++i)
+    {
+        HLink *p = h-&gt;bucket[i];
+        <span class="keyword">while</span> (p)
+        {
+            HLink *q = p-&gt;next;
+            free(p);
+            p = q;
+        }
+        h-&gt;bucket[i] = <span class="keyword">NULL</span>;
+    }
+}</code></pre></div></article><article class="topic" id="s06-8"><h3>06.8 例题、自测与答案</h3><p><strong>例：</strong>数组 <code>[1,2,2,2,5]</code> 查 2，lower=1，upper=4，出现 3 次。查 4，lower=4，但 a[4]=5，因此不存在。</p><p><strong>例：</strong>表长 7，H(key)=key%7，线性探测插 10、17、24，占槽 3、4、5；删 17 后槽 4 设为墓碑，查 24 仍须检查 3、4、5。失败查找按具体探测轨迹计比较，终止空槽是否计一次按题目定义说明。</p><p><strong>自测：</strong>①AVL 插 30、10、20 是哪类？②BST 删除根后为何必须接收返回值？③B+ 内部索引出现 key 就能停止吗？④散列表期望 O(1) 是否代表任何输入都 O(1)？</p><details class="answer"><summary>查看参考答案</summary><p><strong>答案：</strong>①LR，先对 10 左旋，再对 30 右旋，20 成根。②根可能释放并被孩子替换，旧指针不再有效。③不能，记录在叶结点。④不是，碰撞严重时可退化到 O(n)。</p></details></article></section><section class="chapter" id="ch07" aria-labelledby="title-ch07"><div class="chapter-heading"><span>CHAPTER 07</span><h2 id="title-ch07">排序</h2><div class="chapter-subnav"><a href="#s07-1">07.1 比较表：先记性质，再记代码</a><a href="#s07-2">07.2 直接插入与折半插入</a><a href="#s07-3">07.3 冒泡、简单选择与希尔</a><a href="#s07-4">07.4 快速排序与第 k 小</a><a href="#s07-5">07.5 堆排序：先建堆，再逐个取最大</a><a href="#s07-6">07.6 二路归并与逆序对</a><a href="#s07-7">07.7 LSD 基数排序</a><a href="#s07-8">07.8 外部排序：能追踪的流程与内存模拟</a><a href="#s07-9">07.9 手算例题与算法选择</a><a href="#s07-10">07.10 自测与参考答案</a></div></div><article class="topic" id="s07-1"><h3>07.1 比较表：先记性质，再记代码</h3><p>稳定表示相等关键字记录的原有相对顺序不改变；整数数组看不出相等记录的身份，手算时应写成 <code>3a、3b</code>。下面性质针对<strong>本章写法</strong>，复杂度以 n≥2 讨论。</p><div class="table-wrap"><table><thead><tr><th scope="col">算法</th><th scope="col">最好时间</th><th scope="col">平均时间</th><th scope="col">最坏时间</th><th scope="col">辅助空间</th><th scope="col">稳定</th></tr></thead><tbody><tr><td>直接插入</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>是</td></tr><tr><td>折半插入</td><td>O(n log n)比较</td><td>O(n²)总体</td><td>O(n²)总体</td><td>O(1)</td><td>是</td></tr><tr><td>冒泡（提前结束）</td><td>O(n)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>是</td></tr><tr><td>简单选择</td><td>O(n²)</td><td>O(n²)</td><td>O(n²)</td><td>O(1)</td><td>否</td></tr><tr><td>希尔（折半增量）</td><td>依数据与增量</td><td>依增量序列</td><td>O(n²)上界</td><td>O(1)</td><td>否</td></tr><tr><td>快速（首元枢轴）</td><td>O(n log n)</td><td>O(n log n)，随机排列模型</td><td>O(n²)</td><td>平均 O(log n)，最坏 O(n)栈</td><td>否</td></tr><tr><td>堆排序</td><td>通常教材计 O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(1)</td><td>否</td></tr><tr><td>二路归并</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n log n)</td><td>O(n)含辅助数组</td><td>是</td></tr><tr><td>LSD 基数</td><td>O(d(n+r))</td><td>同左</td><td>同左</td><td>O(n+r)</td><td>是</td></tr></tbody></table></div><p>堆排序本章遇父≥子会提前停止下滤，<strong>全相等输入可为 O(n)</strong>；教材表常在互异关键字/一般比较模型下列最好 O(n log n)，答题以题目计量前提为准。希尔排序不存在脱离增量序列的统一平均 O(n log n) 结论。基数 r 是桶数，d 是处理位数，不能隐藏 d 而无条件写 O(n)。</p></article><article class="topic" id="s07-2"><h3>07.2 直接插入与折半插入</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-33" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-33"><span class="keyword">void</span> insertion_sort(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)
+{
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i)
+    {
+        <span class="keyword">int</span> x = a[i], j = i - <span class="number">1</span>;
+        <span class="keyword">while</span> (j &gt;= <span class="number">0</span> &amp;&amp; a[j] &gt; x)
+        {
+            a[j + <span class="number">1</span>] = a[j];
+            --j;
+        }
+        a[j + <span class="number">1</span>] = x;
+    }
+}
+
+<span class="keyword">void</span> binary_insertion_sort(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)
+{
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i)
+    {
+        <span class="keyword">int</span> x = a[i], low = <span class="number">0</span>, high = i;
+        <span class="comment">/* 找第一个&gt;x的位置，把新记录放在旧的相等记录之后。 */</span>
+        <span class="keyword">while</span> (low &lt; high)
+        {
+            <span class="keyword">int</span> mid = low + (high - low) / <span class="number">2</span>;
+            <span class="keyword">if</span> (a[mid] &lt;= x)
+            {
+                low = mid + <span class="number">1</span>;
+            }
+            <span class="keyword">else</span>
+            {
+                high = mid;
+            }
+        }
+        <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &gt; low; --j)
+        {
+            a[j] = a[j - <span class="number">1</span>];
+        }
+        a[low] = x;
+    }
+}</code></pre></div><p>循环开始时 <code>[0,i)</code> 已有序，将 a[i] 插入正确位置后 <code>[0,i+1)</code> 有序。稳定性来自只移动<strong>严格大于</strong> x 的记录。折半减少比较，不减少移动；本版本没有“已有序就跳过二分”的优化，所以有序输入比较仍是 Θ(n log n)。</p></article><article class="topic" id="s07-3"><h3>07.3 冒泡、简单选择与希尔</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-34" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-34"><span class="keyword">void</span> bubble_sort(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)
+{
+    <span class="keyword">for</span> (<span class="keyword">int</span> end = n - <span class="number">1</span>; end &gt; <span class="number">0</span>; --end)
+    {
+        <span class="keyword">bool</span> changed = <span class="keyword">false</span>;
+        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; end; ++j)
+        {
+            <span class="keyword">if</span> (a[j] &gt; a[j + <span class="number">1</span>])
+            {
+                swap_int(&amp;a[j], &amp;a[j + <span class="number">1</span>]);
+                changed = <span class="keyword">true</span>;
+            }
+        }
+        <span class="keyword">if</span> (!changed)
+        {
+            <span class="keyword">break</span>;
+        }
+    }
+}
+
+<span class="keyword">void</span> selection_sort(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)
+{
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i + <span class="number">1</span> &lt; n; ++i)
+    {
+        <span class="keyword">int</span> smallest = i;
+        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; n; ++j)
+        {
+            <span class="keyword">if</span> (a[j] &lt; a[smallest])
+            {
+                smallest = j;
+            }
+        }
+        <span class="keyword">if</span> (smallest != i)
+        {
+            swap_int(&amp;a[i], &amp;a[smallest]);
+        }
+    }
+}
+
+<span class="keyword">void</span> shell_sort(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)
+{
+    <span class="keyword">for</span> (<span class="keyword">int</span> gap = n / <span class="number">2</span>; gap &gt; <span class="number">0</span>; gap /= <span class="number">2</span>)
+    {
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = gap; i &lt; n; ++i)
+        {
+            <span class="keyword">int</span> x = a[i], j = i;
+            <span class="keyword">while</span> (j &gt;= gap &amp;&amp; a[j - gap] &gt; x)
+            {
+                a[j] = a[j - gap];
+                j -= gap;
+            }
+            a[j] = x;
+        }
+    }
+}</code></pre></div><p>冒泡每趟确定当前最大值的最终位置；选择每趟确定当前最小值的最终位置，但<strong>长距离交换</strong>可能越过相同关键字。希尔只是使各间隔子序列有序，gap&gt;1 的一趟结束后全表未必有序。</p></article><article class="topic" id="s07-4"><h3>07.4 快速排序与第 k 小</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-35" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-35"><span class="comment">/* 闭区间[lo,hi]，首元枢轴，挖坑式双向划分。 */</span>
+<span class="keyword">int</span> partition_c(<span class="keyword">int</span> a[], <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)
+{
+    <span class="keyword">int</span> pivot = a[lo];
+    <span class="keyword">while</span> (lo &lt; hi)
+    {
+        <span class="keyword">while</span> (lo &lt; hi &amp;&amp; a[hi] &gt;= pivot)
+        {
+            --hi;
+        }
+        a[lo] = a[hi];
+        <span class="keyword">while</span> (lo &lt; hi &amp;&amp; a[lo] &lt;= pivot)
+        {
+            ++lo;
+        }
+        a[hi] = a[lo];
+    }
+    a[lo] = pivot;
+    <span class="keyword">return</span> lo;
+}
+
+<span class="keyword">void</span> quick_sort(<span class="keyword">int</span> a[], <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)
+{
+    <span class="keyword">if</span> (lo &gt;= hi)
+    {
+        <span class="keyword">return</span>;
+    }
+    <span class="keyword">int</span> p = partition_c(a, lo, hi);
+    quick_sort(a, lo, p - <span class="number">1</span>);
+    quick_sort(a, p + <span class="number">1</span>, hi);
+}
+
+<span class="comment">/* k为0基次序，0&lt;=k&lt;n；会重排数组。平均O(n)，最坏O(n²)。 */</span>
+<span class="keyword">bool</span> quick_select(<span class="keyword">int</span> a[], <span class="keyword">int</span> n, <span class="keyword">int</span> k, <span class="keyword">int</span> *out)
+{
+    <span class="keyword">if</span> (k &lt; <span class="number">0</span> || k &gt;= n)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    <span class="keyword">int</span> lo = <span class="number">0</span>, hi = n - <span class="number">1</span>;
+    <span class="keyword">while</span> (lo &lt;= hi)
+    {
+        <span class="keyword">int</span> p = partition_c(a, lo, hi);
+        <span class="keyword">if</span> (p == k)
+        {
+            *out = a[p];
+            <span class="keyword">return</span> <span class="keyword">true</span>;
+        }
+        <span class="keyword">if</span> (p &lt; k)
+        {
+            lo = p + <span class="number">1</span>;
+        }
+        <span class="keyword">else</span>
+        {
+            hi = p - <span class="number">1</span>;
+        }
+    }
+    <span class="keyword">return</span> <span class="keyword">false</span>;
+}</code></pre></div><p>一趟划分只保证枢轴左边≤它、右边≥它，两边内部未必有序。本版本全相等、有序、逆序输入可能连续产生极端划分，最坏 O(n²)。随机枢轴或三数取中能改善典型表现；大量重复值时三路划分更合适，但不能据此声称普通快排最坏 O(n log n)。</p></article><article class="topic" id="s07-5"><h3>07.5 堆排序：先建堆，再逐个取最大</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-36" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-36"><span class="comment">/* 大根堆，下标0；n是当前堆的元素数量。 */</span>
+<span class="keyword">void</span> sift_down(<span class="keyword">int</span> a[], <span class="keyword">int</span> n, <span class="keyword">int</span> root)
+{
+    <span class="keyword">int</span> x = a[root], child = <span class="number">2</span> * root + <span class="number">1</span>;
+    <span class="keyword">while</span> (child &lt; n)
+    {
+        <span class="keyword">if</span> (child + <span class="number">1</span> &lt; n &amp;&amp; a[child + <span class="number">1</span>] &gt; a[child])
+        {
+            ++child;
+        }
+        <span class="keyword">if</span> (x &gt;= a[child])
+        {
+            <span class="keyword">break</span>;
+        }
+        a[root] = a[child];
+        root = child;
+        child = <span class="number">2</span> * root + <span class="number">1</span>;
+    }
+    a[root] = x;
+}
+
+<span class="keyword">void</span> heap_sort(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)
+{
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = n / <span class="number">2</span> - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i)
+    {
+        sift_down(a, n, i);
+    }
+    <span class="keyword">for</span> (<span class="keyword">int</span> end = n - <span class="number">1</span>; end &gt; <span class="number">0</span>; --end)
+    {
+        swap_int(&amp;a[<span class="number">0</span>], &amp;a[end]);
+        sift_down(a, end, <span class="number">0</span>);
+    }
+}</code></pre></div><p>0 基最后一个非叶结点为 <code>n/2-1</code>。自底向上建堆 O(n)，不是把每个结点的 O(log n) 简单相乘；多数结点接近叶子，下滤距离很短。升序排序用大根堆；最大元素交换到尾部后<strong>尾部不再属于堆</strong>，因此下滤传 end，而不是 n。</p></article><article class="topic" id="s07-6"><h3>07.6 二路归并与逆序对</h3><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-37" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-37"><span class="keyword">void</span> merge_range(<span class="keyword">int</span> a[], <span class="keyword">int</span> tmp[], <span class="keyword">int</span> lo, <span class="keyword">int</span> mid, <span class="keyword">int</span> hi)
+{
+    <span class="keyword">int</span> i = lo, j = mid, k = lo; <span class="comment">/* 两段均半开：[lo,mid)、[mid,hi)。 */</span>
+    <span class="keyword">while</span> (i &lt; mid &amp;&amp; j &lt; hi)
+    {
+        tmp[k++] = a[i] &lt;= a[j] ? a[i++] : a[j++];
+    }
+    <span class="keyword">while</span> (i &lt; mid)
+    {
+        tmp[k++] = a[i++];
+    }
+    <span class="keyword">while</span> (j &lt; hi)
+    {
+        tmp[k++] = a[j++];
+    }
+    <span class="keyword">for</span> (i = lo; i &lt; hi; ++i)
+    {
+        a[i] = tmp[i];
+    }
+}
+
+<span class="keyword">void</span> merge_rec(<span class="keyword">int</span> a[], <span class="keyword">int</span> tmp[], <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)
+{
+    <span class="keyword">if</span> (hi - lo &lt; <span class="number">2</span>)
+    {
+        <span class="keyword">return</span>;
+    }
+    <span class="keyword">int</span> mid = lo + (hi - lo) / <span class="number">2</span>;
+    merge_rec(a, tmp, lo, mid);
+    merge_rec(a, tmp, mid, hi);
+    merge_range(a, tmp, lo, mid, hi);
+}
+
+<span class="keyword">void</span> merge_sort(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)
+{
+    <span class="keyword">if</span> (n &lt; <span class="number">2</span>)
+    {
+        <span class="keyword">return</span>;
+    }
+    <span class="keyword">int</span> *tmp = xmalloc((<span class="keyword">size_t</span>)n * <span class="keyword">sizeof</span> *tmp);
+    merge_rec(a, tmp, <span class="number">0</span>, n);
+    free(tmp);
+}
+
+<span class="comment">/* 逆序对定义i&lt;j且a[i]&gt;a[j]；返回数量，顺带把数组排好序。 */</span>
+<span class="keyword">long</span> <span class="keyword">long</span> inversion_rec(<span class="keyword">int</span> a[], <span class="keyword">int</span> tmp[], <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)
+{
+    <span class="keyword">if</span> (hi - lo &lt; <span class="number">2</span>)
+    {
+        <span class="keyword">return</span> <span class="number">0</span>;
+    }
+    <span class="keyword">int</span> mid = lo + (hi - lo) / <span class="number">2</span>;
+    <span class="keyword">long</span> <span class="keyword">long</span> count = inversion_rec(a, tmp, lo, mid) + inversion_rec(a, tmp, mid, hi);
+    <span class="keyword">int</span> i = lo, j = mid, k = lo;
+    <span class="keyword">while</span> (i &lt; mid &amp;&amp; j &lt; hi)
+    {
+        <span class="keyword">if</span> (a[i] &lt;= a[j])
+        {
+            tmp[k++] = a[i++];
+        }
+        <span class="keyword">else</span>
+        {
+            count += mid - i;
+            tmp[k++] = a[j++];
+        }
+    }
+    <span class="keyword">while</span> (i &lt; mid)
+    {
+        tmp[k++] = a[i++];
+    }
+    <span class="keyword">while</span> (j &lt; hi)
+    {
+        tmp[k++] = a[j++];
+    }
+    <span class="keyword">for</span> (i = lo; i &lt; hi; ++i)
+    {
+        a[i] = tmp[i];
+    }
+    <span class="keyword">return</span> count;
+}
+
+<span class="keyword">long</span> <span class="keyword">long</span> inversion_count(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)
+{
+    <span class="keyword">if</span> (n &lt; <span class="number">2</span>)
+    {
+        <span class="keyword">return</span> <span class="number">0</span>;
+    }
+    <span class="keyword">int</span> *tmp = xmalloc((<span class="keyword">size_t</span>)n * <span class="keyword">sizeof</span> *tmp);
+    <span class="keyword">long</span> <span class="keyword">long</span> result = inversion_rec(a, tmp, <span class="number">0</span>, n);
+    free(tmp);
+    <span class="keyword">return</span> result;
+}</code></pre></div><p>稳定性来自相等时先取左段。逆序对中右段元素比左段当前值小时，与左段剩下的 <code>mid-i</code> 个元素都构成逆序。逆序对最多 n(n-1)/2，用较宽整数保存。</p></article><article class="topic" id="s07-7"><h3>07.7 LSD 基数排序</h3><p>本实现只接受<strong>非负 int</strong>，按十进制从低位到高位；每趟用稳定计数分配。负数不能直接套用取模下标。</p><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-38" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-38"><span class="keyword">bool</span> radix_sort(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)
+{
+    <span class="keyword">int</span> max = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)
+    {
+        <span class="keyword">if</span> (a[i] &lt; <span class="number">0</span>)
+        {
+            <span class="keyword">return</span> <span class="keyword">false</span>;
+        }
+        <span class="keyword">if</span> (a[i] &gt; max)
+        {
+            max = a[i];
+        }
+    }
+    <span class="keyword">if</span> (n &lt; <span class="number">2</span>)
+    {
+        <span class="keyword">return</span> <span class="keyword">true</span>;
+    }
+    <span class="keyword">int</span> *tmp = xmalloc((<span class="keyword">size_t</span>)n * <span class="keyword">sizeof</span> *tmp);
+    <span class="keyword">for</span> (<span class="keyword">int</span> exp = <span class="number">1</span>;;)
+    {
+        <span class="keyword">int</span> count[<span class="number">10</span>] = {<span class="number">0</span>};
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)
+        {
+            ++count[(a[i] / exp) % <span class="number">10</span>];
+        }
+        <span class="keyword">for</span> (<span class="keyword">int</span> d = <span class="number">1</span>; d &lt; <span class="number">10</span>; ++d)
+        {
+            count[d] += count[d - <span class="number">1</span>];
+        }
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i)
+        {
+            <span class="keyword">int</span> d = (a[i] / exp) % <span class="number">10</span>;
+            tmp[--count[d]] = a[i];
+        }
+        memcpy(a, tmp, (<span class="keyword">size_t</span>)n * <span class="keyword">sizeof</span> *a);
+        <span class="keyword">if</span> (max / exp &lt; <span class="number">10</span>)
+        {
+            <span class="keyword">break</span>; <span class="comment">/* 先判终止，再乘10，避免exp溢出。 */</span>
+        }
+        exp *= <span class="number">10</span>;
+    }
+    free(tmp);
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}</code></pre></div><p>每趟必须稳定，否则前面低位已形成的相对顺序会被破坏。LSD 从低到高逐趟处理整个序列，MSD 从高位分组后递归处理各组，不要混同。</p></article><article class="topic" id="s07-8"><h3>07.8 外部排序：能追踪的流程与内存模拟</h3><p>外部排序的数据放不进内存。典型流程：读取内存容纳的一块记录、内部排序写成初始有序段；再多路归并，重复到剩一段。m 个初始段，k 路归并的归并趟数约为 <code>⌈log_k m⌉</code>，可逐次做 <code>m=ceil(m/k)</code> 精确计数；k≥2。</p><p>每趟归并通常将所有记录读写一遍；按块计 I/O，若数据占 B 块，均匀全量归并模型每趟约 2B 次块传输，初始段生成的读写另外算。内存通常至少需 k 个输入缓冲区和 1 个输出缓冲区。增加归并路数可减少趟数，但缓冲空间与选最小的开销也会变化。</p><p>置换选择用“工作区最小记录”输出，新读记录若小于刚输出值，冻结到下一段；随机数据的平均初始段长度约为工作区容量的 2 倍，<strong>不是所有输入都保证 2 倍</strong>。败者树在每次更换某一路头元素后沿路径调整，选取代价 O(log k)。最优归并树用各段长度作权，按 Huffman 思路使读写代价最小；k 路时必要时补零权虚段，使叶子数满足 <code>(m-1)%(k-1)==0</code>。</p><p>下面是 k 路归并的<strong>内存模拟</strong>，用于理解“每次取各路当前最小值”。它没有磁盘缓冲、败者树与置换选择，时间 O(Nk)，不是外部排序的完整工程实现。</p><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-39" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-39"><span class="keyword">int</span> multiway_merge(<span class="keyword">const</span> <span class="keyword">int</span> *runs[], <span class="keyword">const</span> <span class="keyword">int</span> len[], <span class="keyword">int</span> k, <span class="keyword">int</span> out[])
+{
+    <span class="keyword">int</span> pos[CAP] = {<span class="number">0</span>}, count = <span class="number">0</span>; <span class="comment">/* 0&lt;=k&lt;=CAP，out容量&gt;=各段长度总和。 */</span>
+    <span class="keyword">for</span> (;;)
+    {
+        <span class="keyword">int</span> best = -<span class="number">1</span>;
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; ++i)
+        {
+            <span class="keyword">if</span> (pos[i] &lt; len[i] &amp;&amp; (best == -<span class="number">1</span> || runs[i][pos[i]] &lt; runs[best][pos[best]]))
+            {
+                best = i;
+            }
+        }
+        <span class="keyword">if</span> (best == -<span class="number">1</span>)
+        {
+            <span class="keyword">break</span>;
+        }
+        out[count++] = runs[best][pos[best]++];
+    }
+    <span class="keyword">return</span> count;
+}</code></pre></div></article><article class="topic" id="s07-9"><h3>07.9 手算例题与算法选择</h3><p>数组 <code>[5,2,4,1,3]</code>：直接插入第一趟为 <code>[2,5,4,1,3]</code>；冒泡从左往右第一趟为 <code>[2,4,1,3,5]</code>；选择第一趟为 <code>[1,2,4,5,3]</code>。判断算法时要知道“趟”的定义与扫描方向，不能仅看某一位置变有序。</p><p>稳定性反例：选择排序 <code>[2a,2b,1]</code> 第一趟交换后为 <code>[1,2b,2a]</code>，相同键顺序被颠倒。快排、堆排也可能跨位置移动相同记录。</p><div class="table-wrap"><table><thead><tr><th scope="col">场景</th><th scope="col">合理考虑</th><th scope="col">理由/条件</th></tr></thead><tbody><tr><td>基本有序、规模小</td><td>直接插入</td><td>移动少，可接近线性</td></tr><tr><td>要稳定且最坏有保证</td><td>归并</td><td>O(n log n)，但要额外空间</td></tr><tr><td>原地且最坏有保证</td><td>堆</td><td>不稳定</td></tr><tr><td>内存数组一般比较排序</td><td>改进快排</td><td>平均表现好，注意最坏退化</td></tr><tr><td>仅找第 k 小</td><td>快速选择</td><td>不必排完整个数组</td></tr><tr><td>只需最大的 k 个且k较小</td><td>容量k的小根堆</td><td>扫描 O(n log k)，辅助O(k)</td></tr><tr><td>位数固定的非负整数</td><td>基数</td><td>不受比较排序Ω(n log n)下界约束</td></tr></tbody></table></div><p>比较排序下界 Ω(n log n) 针对一般比较模型，不能用来否定计数/基数排序。链表缺少随机访问，直接套数组折半、希尔或堆排序模板不合适；归并很适合链表链接操作。</p></article><article class="topic" id="s07-10"><h3>07.10 自测与参考答案</h3><ol><li>折半插入减少了什么？答：定位的比较次数；最坏移动仍 O(n²)。</li><li>初始已经有序，首元枢轴快排怎样？答：可能退化，每轮只排除一个枢轴，T(n)=T(n-1)+O(n)。</li><li>归并相等时取右侧，还稳定吗？答：可能不稳定，来自右段的同键记录会越过左段原本在前的同键记录。</li><li><code>[3,1,2]</code> 的逆序对有几对？答：2 对，(3,1)、(3,2)。</li><li>17 个初始段做 4 路归并需要几趟？答：17→5→2→1，共3趟；不把初始段生成混入归并趟数。</li><li>一趟快排能确定哪些最终位置？答：至少确定该趟枢轴的一个合法最终位置；两边内部仍可无序，重复键下“第几个相同记录”无唯一身份次序。</li></ol></article></section><section class="chapter" id="ch08" aria-labelledby="title-ch08"><div class="chapter-heading"><span>CHAPTER 08</span><h2 id="title-ch08">综合算法题：从条件推导代码</h2><div class="chapter-subnav"><a href="#s08-1">08.1 独立练习的使用方式</a><a href="#s08-2">08.2 E01—E03：数组的三种扫描</a><a href="#s08-3">08.3 E04—E05：链表中点与半链逆置</a><a href="#s08-4">08.4 E06—E08：树的递归状态</a><a href="#s08-5">08.5 E09—E10：图的全局标记与路径标记</a><a href="#s08-6">08.6 E11—E12：双指针与 Top-k</a></div></div><article class="topic" id="s08-1"><h3>08.1 独立练习的使用方式</h3><p>以下题目为<strong>原创练习，不标注为历年真题</strong>。先看题目写出思路与复杂度，再看后面的答案代码。与前文的小型自测合用，覆盖线性结构、树、图与排序的代码迁移。</p><div class="table-wrap"><table><thead><tr><th scope="col">题号</th><th scope="col">题目</th><th scope="col">目标</th></tr></thead><tbody><tr><td>E01</td><td>原地循环左移数组 k 位</td><td>三次逆置，O(n)/O(1)</td></tr><tr><td>E02</td><td>最小缺失正整数</td><td>标记范围证明，O(n)/O(n)</td></tr><tr><td>E03</td><td>顺序表奇数在前、偶数在后</td><td>双指针，不要求稳定</td></tr><tr><td>E04</td><td>链表 L0,L1,…,Ln 改排 L0,Ln,L1,Ln-1,…</td><td>中点+逆置+交织，O(n)/O(1)</td></tr><tr><td>E05</td><td>判断链表回文，并恢复链表</td><td>比较半链，O(n)/O(1)</td></tr><tr><td>E06</td><td>二叉树带权路径长度</td><td>叶权×深度，O(n)/O(h)</td></tr><tr><td>E07</td><td>按先序找第 k 个结点</td><td>引用计数状态与提前返回</td></tr><tr><td>E08</td><td>根到叶路径和等于 target 的路径数</td><td>递归携带剩余值</td></tr><tr><td>E09</td><td>无向简单图是否为树</td><td>连通+E=V-1</td></tr><tr><td>E10</td><td>输出有向图 s→t 的全部简单路径</td><td>DFS回溯，路径内标记</td></tr><tr><td>E11</td><td>两个升序数组的公共不同值</td><td>归并双指针</td></tr><tr><td>E12</td><td>未排序数组中最小的 k 个数</td><td>容量k的大根堆</td></tr></tbody></table></div></article><article class="topic" id="s08-2"><h3>08.2 E01—E03：数组的三种扫描</h3><details class="answer"><summary>查看思路与参考实现</summary><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-40" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-40"><span class="keyword">void</span> reverse_range(<span class="keyword">int</span> a[], <span class="keyword">int</span> lo, <span class="keyword">int</span> hi)
+{ <span class="comment">/* 闭区间。 */</span>
+    <span class="keyword">while</span> (lo &lt; hi)
+    {
+        swap_int(&amp;a[lo++], &amp;a[hi--]);
+    }
+}
+
+<span class="keyword">bool</span> rotate_left_array(<span class="keyword">int</span> a[], <span class="keyword">int</span> n, <span class="keyword">int</span> k)
+{
+    <span class="keyword">if</span> (n &lt; <span class="number">0</span> || k &lt; <span class="number">0</span>)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    <span class="keyword">if</span> (n == <span class="number">0</span>)
+    {
+        <span class="keyword">return</span> <span class="keyword">true</span>;
+    }
+    k %= n;
+    reverse_range(a, <span class="number">0</span>, k - <span class="number">1</span>);
+    reverse_range(a, k, n - <span class="number">1</span>);
+    reverse_range(a, <span class="number">0</span>, n - <span class="number">1</span>);
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+
+<span class="keyword">int</span> first_missing_positive(<span class="keyword">const</span> <span class="keyword">int</span> a[], <span class="keyword">int</span> n)
+{
+    <span class="keyword">bool</span> *seen = xmalloc(((<span class="keyword">size_t</span>)n + <span class="number">1</span>) * <span class="keyword">sizeof</span> *seen);
+    memset(seen, <span class="number">0</span>, ((<span class="keyword">size_t</span>)n + <span class="number">1</span>) * <span class="keyword">sizeof</span> *seen);
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)
+    {
+        <span class="keyword">if</span> (a[i] &gt; <span class="number">0</span> &amp;&amp; a[i] &lt;= n)
+        {
+            seen[a[i]] = <span class="keyword">true</span>;
+        }
+    }
+    <span class="keyword">int</span> answer = <span class="number">1</span>;
+    <span class="keyword">while</span> (answer &lt;= n &amp;&amp; seen[answer])
+    {
+        ++answer;
+    }
+    free(seen);
+    <span class="keyword">return</span> answer;
+}
+
+<span class="keyword">void</span> odd_before_even(<span class="keyword">int</span> a[], <span class="keyword">int</span> n)
+{
+    <span class="keyword">int</span> i = <span class="number">0</span>, j = n - <span class="number">1</span>;
+    <span class="keyword">while</span> (i &lt; j)
+    {
+        <span class="keyword">while</span> (i &lt; j &amp;&amp; a[i] % <span class="number">2</span> != <span class="number">0</span>)
+        {
+            ++i;
+        }
+        <span class="keyword">while</span> (i &lt; j &amp;&amp; a[j] % <span class="number">2</span> == <span class="number">0</span>)
+        {
+            --j;
+        }
+        <span class="keyword">if</span> (i &lt; j)
+        {
+            swap_int(&amp;a[i++], &amp;a[j--]);
+        }
+    }
+}</code></pre></div><p>E01 的证明：将数组分成 A、B 两段，目标 BA；<code>reverse(reverse(A) reverse(B))=BA</code>。例 <code>[1,2,3,4,5]</code> 左移 2 得 <code>[3,4,5,1,2]</code>。E02 n 个数不可能覆盖 1..n+1，所以答案最多 n+1。E03 负奇数在 C 中 <code>%2</code> 可能为 -1，因此判断非零，不用 <code>==1</code>。</p></details></article><article class="topic" id="s08-3"><h3>08.3 E04—E05：链表中点与半链逆置</h3><details class="answer"><summary>查看思路与参考实现</summary><p>本练习章另定义独立结点类型，源码能单独编译；它不依赖第01章文件。链表仍带头结点。</p><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-41" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-41"><span class="keyword">typedef</span> <span class="keyword">struct</span> ENode
+{
+    <span class="keyword">int</span> data;
+    <span class="keyword">struct</span> ENode *next;
+} ENode;
+
+ENode *reverse_nodes(ENode *p)
+{ <span class="comment">/* 不带头结点的一段链，返回新首结点。 */</span>
+    ENode *pre = <span class="keyword">NULL</span>;
+    <span class="keyword">while</span> (p)
+    {
+        ENode *q = p-&gt;next;
+        p-&gt;next = pre;
+        pre = p;
+        p = q;
+    }
+    <span class="keyword">return</span> pre;
+}
+
+<span class="keyword">void</span> reorder_list(ENode *head)
+{
+    ENode *first = head-&gt;next;
+    <span class="keyword">if</span> (!first || !first-&gt;next)
+    {
+        <span class="keyword">return</span>;
+    }
+    ENode *slow = first, *fast = first;
+    <span class="keyword">while</span> (fast-&gt;next &amp;&amp; fast-&gt;next-&gt;next)
+    {
+        slow = slow-&gt;next;
+        fast = fast-&gt;next-&gt;next;
+    }
+    ENode *right = reverse_nodes(slow-&gt;next);
+    slow-&gt;next = <span class="keyword">NULL</span>;
+    ENode *left = first;
+    <span class="keyword">while</span> (right)
+    {
+        ENode *a = left-&gt;next, *b = right-&gt;next;
+        left-&gt;next = right;
+        right-&gt;next = a;
+        left = a;
+        right = b;
+    }
+}
+
+<span class="keyword">bool</span> palindrome_list(ENode *head)
+{
+    ENode *first = head-&gt;next;
+    <span class="keyword">if</span> (!first || !first-&gt;next)
+    {
+        <span class="keyword">return</span> <span class="keyword">true</span>;
+    }
+    ENode *slow = first, *fast = first;
+    <span class="keyword">while</span> (fast-&gt;next &amp;&amp; fast-&gt;next-&gt;next)
+    {
+        slow = slow-&gt;next;
+        fast = fast-&gt;next-&gt;next;
+    }
+    ENode *right = reverse_nodes(slow-&gt;next), *a = first, *b = right;
+    <span class="keyword">bool</span> ok = <span class="keyword">true</span>;
+    <span class="keyword">while</span> (b)
+    {
+        <span class="keyword">if</span> (a-&gt;data != b-&gt;data)
+        {
+            ok = <span class="keyword">false</span>;
+        }
+        a = a-&gt;next;
+        b = b-&gt;next;
+    }
+    slow-&gt;next = reverse_nodes(right); <span class="comment">/* 判定后恢复，即使不回文也恢复。 */</span>
+    <span class="keyword">return</span> ok;
+}</code></pre></div><p>E04 <code>[0,1,2,3,4]</code> 变 <code>[0,4,1,3,2]</code>，偶数长度 <code>[0,1,2,3]</code> 变 <code>[0,3,1,2]</code>。找到的是前半段末尾；断开后右段长度不超过左段，所以交织不会提前耗尽 left。E05 只比较右半段长度次，奇数长度的中间结点不必比较。</p></details></article><article class="topic" id="s08-4"><h3>08.4 E06—E08：树的递归状态</h3><details class="answer"><summary>查看思路与参考实现</summary><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-42" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-42"><span class="keyword">typedef</span> <span class="keyword">struct</span> ETree
+{
+    <span class="keyword">int</span> data;
+    <span class="keyword">struct</span> ETree *left, *right;
+} ETree;
+
+<span class="comment">/* 叶结点data作为权；调用weighted_path_length(root,0)。 */</span>
+<span class="keyword">long</span> <span class="keyword">long</span> weighted_path_length(ETree *t, <span class="keyword">int</span> depth)
+{
+    <span class="keyword">if</span> (!t)
+    {
+        <span class="keyword">return</span> <span class="number">0</span>;
+    }
+    <span class="keyword">if</span> (!t-&gt;left &amp;&amp; !t-&gt;right)
+    {
+        <span class="keyword">return</span> (<span class="keyword">long</span> <span class="keyword">long</span>)t-&gt;data * depth;
+    }
+    <span class="keyword">return</span> weighted_path_length(t-&gt;left, depth + <span class="number">1</span>) + weighted_path_length(t-&gt;right, depth + <span class="number">1</span>);
+}
+
+<span class="comment">/* 调用前*k设为正整数目标次序；函数会消耗k。 */</span>
+ETree *preorder_kth(ETree *t, <span class="keyword">int</span> *k)
+{
+    <span class="keyword">if</span> (!t || *k &lt;= <span class="number">0</span>)
+    {
+        <span class="keyword">return</span> <span class="keyword">NULL</span>;
+    }
+    <span class="keyword">if</span> (--*k == <span class="number">0</span>)
+    {
+        <span class="keyword">return</span> t;
+    }
+    ETree *p = preorder_kth(t-&gt;left, k);
+    <span class="keyword">return</span> p ? p : preorder_kth(t-&gt;right, k);
+}
+
+<span class="keyword">int</span> path_sum_count(ETree *t, <span class="keyword">long</span> <span class="keyword">long</span> target)
+{
+    <span class="keyword">if</span> (!t)
+    {
+        <span class="keyword">return</span> <span class="number">0</span>;
+    }
+    <span class="keyword">if</span> (!t-&gt;left &amp;&amp; !t-&gt;right)
+    {
+        <span class="keyword">return</span> target == t-&gt;data ? <span class="number">1</span> : <span class="number">0</span>;
+    }
+    <span class="keyword">return</span> path_sum_count(t-&gt;left, target - t-&gt;data) + path_sum_count(t-&gt;right, target - t-&gt;data);
+}</code></pre></div><p>E06 根深度按<strong>边数</strong>从0开始，不能调用高度约定中的第1层直接乘权；只统计叶子。E07 每遇到一个先序结点扣减目标，命中后沿调用栈传回指针；k 越界返回 NULL。E08 题目要求根到叶，不能在内部结点恰好等于 target 时提前算一条；若允许负权，也不能仅因剩余 target&lt;0 就剪枝。</p></details></article><article class="topic" id="s08-5"><h3>08.5 E09—E10：图的全局标记与路径标记</h3><details class="answer"><summary>查看思路与参考实现</summary><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-43" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-43"><span class="comment">/* 本练习采用0/1邻接矩阵，n&lt;=MAXV。 */</span>
+<span class="keyword">void</span> simple_dfs(<span class="keyword">const</span> <span class="keyword">int</span> a[][MAXV], <span class="keyword">int</span> n, <span class="keyword">int</span> u, <span class="keyword">bool</span> seen[])
+{
+    seen[u] = <span class="keyword">true</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> v = <span class="number">0</span>; v &lt; n; ++v)
+    {
+        <span class="keyword">if</span> (a[u][v] &amp;&amp; !seen[v])
+        {
+            simple_dfs(a, n, v, seen);
+        }
+    }
+}
+
+<span class="comment">/* 前提：矩阵对称、对角为0、无重边，即无向简单图。 */</span>
+<span class="keyword">bool</span> undirected_is_tree(<span class="keyword">const</span> <span class="keyword">int</span> a[][MAXV], <span class="keyword">int</span> n)
+{
+    <span class="keyword">if</span> (n == <span class="number">0</span>)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    <span class="keyword">int</span> edges = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)
+    {
+        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; n; ++j)
+        {
+            edges += a[i][j] != <span class="number">0</span>;
+        }
+    }
+    <span class="keyword">if</span> (edges != n - <span class="number">1</span>)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    <span class="keyword">bool</span> seen[MAXV] = {<span class="keyword">false</span>};
+    simple_dfs(a, n, <span class="number">0</span>, seen);
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i)
+    {
+        <span class="keyword">if</span> (!seen[i])
+        {
+            <span class="keyword">return</span> <span class="keyword">false</span>;
+        }
+    }
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+
+<span class="keyword">typedef</span> <span class="keyword">void</span> (*PathVisitor)(<span class="keyword">const</span> <span class="keyword">int</span> path[], <span class="keyword">int</span> length, <span class="keyword">void</span> *context);
+
+<span class="keyword">void</span> simple_paths(<span class="keyword">const</span> <span class="keyword">int</span> a[][MAXV], <span class="keyword">int</span> n, <span class="keyword">int</span> u, <span class="keyword">int</span> target, <span class="keyword">bool</span> on_path[], <span class="keyword">int</span> path[],
+                  <span class="keyword">int</span> depth, PathVisitor visit, <span class="keyword">void</span> *context)
+{
+    on_path[u] = <span class="keyword">true</span>;
+    path[depth++] = u;
+    <span class="keyword">if</span> (u == target)
+    {
+        visit(path, depth, context);
+    }
+    <span class="keyword">else</span>
+    {
+        <span class="keyword">for</span> (<span class="keyword">int</span> v = <span class="number">0</span>; v &lt; n; ++v)
+        {
+            <span class="keyword">if</span> (a[u][v] &amp;&amp; !on_path[v])
+            {
+                simple_paths(a, n, v, target, on_path, path, depth, visit, context);
+            }
+        }
+    }
+    on_path[u] = <span class="keyword">false</span>; <span class="comment">/* 回溯时必须撤销，使其他路径可以再次使用该顶点。 */</span>
+}</code></pre></div><p>E09 仅 E=V-1 不够，比如“三角形加一个孤立点”也满足该式，仍需连通。矩阵版时间 O(V²)，邻接表版可 O(V+E)。E10 初始 on_path 全 false，depth=0；输出规模可能指数甚至阶乘级，不能写 O(V+E)，辅助递归/路径空间 O(V)。普通可达性 DFS 用永久 visited，全部简单路径用路径内 on_path，并在回溯时撤销。</p></details></article><article class="topic" id="s08-6"><h3>08.6 E11—E12：双指针与 Top-k</h3><details class="answer"><summary>查看思路与参考实现</summary><div class="codebox"><div class="codebar"><span>C11 · 教学代码</span><button type="button" class="copy" data-code="code-44" aria-label="复制这段代码">复制代码</button></div><pre><code id="code-44"><span class="comment">/* 数组均非降序；结果不同值只出现一次，out容量&gt;=min(n,m)。 */</span>
+<span class="keyword">int</span> intersection_unique(<span class="keyword">const</span> <span class="keyword">int</span> a[], <span class="keyword">int</span> n, <span class="keyword">const</span> <span class="keyword">int</span> b[], <span class="keyword">int</span> m, <span class="keyword">int</span> out[])
+{
+    <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>, k = <span class="number">0</span>;
+    <span class="keyword">while</span> (i &lt; n &amp;&amp; j &lt; m)
+    {
+        <span class="keyword">if</span> (a[i] &lt; b[j])
+        {
+            ++i;
+        }
+        <span class="keyword">else</span> <span class="keyword">if</span> (a[i] &gt; b[j])
+        {
+            ++j;
+        }
+        <span class="keyword">else</span>
+        {
+            <span class="keyword">if</span> (k == <span class="number">0</span> || out[k - <span class="number">1</span>] != a[i])
+            {
+                out[k++] = a[i];
+            }
+            ++i;
+            ++j;
+        }
+    }
+    <span class="keyword">return</span> k;
+}
+
+<span class="keyword">void</span> topk_down(<span class="keyword">int</span> heap[], <span class="keyword">int</span> n, <span class="keyword">int</span> root)
+{
+    <span class="keyword">int</span> x = heap[root], child = <span class="number">2</span> * root + <span class="number">1</span>;
+    <span class="keyword">while</span> (child &lt; n)
+    {
+        <span class="keyword">if</span> (child + <span class="number">1</span> &lt; n &amp;&amp; heap[child + <span class="number">1</span>] &gt; heap[child])
+        {
+            ++child;
+        }
+        <span class="keyword">if</span> (x &gt;= heap[child])
+        {
+            <span class="keyword">break</span>;
+        }
+        heap[root] = heap[child];
+        root = child;
+        child = <span class="number">2</span> * root + <span class="number">1</span>;
+    }
+    heap[root] = x;
+}
+
+<span class="comment">/* 返回最小k个数，结果保存在out中的大根堆，不保证升序；保留重复值。 */</span>
+<span class="keyword">bool</span> smallest_k(<span class="keyword">const</span> <span class="keyword">int</span> a[], <span class="keyword">int</span> n, <span class="keyword">int</span> k, <span class="keyword">int</span> out[])
+{
+    <span class="keyword">if</span> (k &lt; <span class="number">0</span> || k &gt; n)
+    {
+        <span class="keyword">return</span> <span class="keyword">false</span>;
+    }
+    <span class="keyword">if</span> (k == <span class="number">0</span>)
+    {
+        <span class="keyword">return</span> <span class="keyword">true</span>;
+    }
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; ++i)
+    {
+        out[i] = a[i];
+    }
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = k / <span class="number">2</span> - <span class="number">1</span>; i &gt;= <span class="number">0</span>; --i)
+    {
+        topk_down(out, k, i);
+    }
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = k; i &lt; n; ++i)
+    {
+        <span class="keyword">if</span> (a[i] &lt; out[<span class="number">0</span>])
+        {
+            out[<span class="number">0</span>] = a[i];
+            topk_down(out, k, <span class="number">0</span>);
+        }
+    }
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}</code></pre></div><p>E11 每步至少移动一个指针，O(n+m) 时间，不含输出空间为 O(1)。E12 保留 k 个候选中的最大值在堆顶，新值更小才替换；不变量是堆内始终保存当前已扫描元素中最小的 k 个，时间 O(n log k)（k=1 时 O(n)），辅助 O(k)。要最大 k 个则换成小根堆；若题目还要求有序，最后另对结果排序。</p></details></article></section><section class="chapter" id="ch09" aria-labelledby="title-ch09"><div class="chapter-heading"><span>CHAPTER 09</span><h2 id="title-ch09">复习清单与验证说明</h2><div class="chapter-subnav"><a href="#s09-1">09.1 建议的三轮使用顺序</a><a href="#s09-2">09.2 源码包与可运行性</a><a href="#s09-3">09.3 覆盖深度与边界</a><a href="#s09-4">09.4 查阅资料</a></div></div><article class="topic" id="s09-1"><h3>09.1 建议的三轮使用顺序</h3><p>第一轮按章节阅读，画出存储结构，追踪一个正常输入和一个空/单元素输入。第二轮隐藏代码，从题意写出不变量和函数，再对照查漏。第三轮混合练习，看到题目先判断结构、是否有序、是否需要稳定、能否修改输入以及允许的辅助空间。</p><div class="table-wrap"><table><thead><tr><th scope="col">自查项</th><th scope="col">过关标准</th></tr></thead><tbody><tr><td>链表</td><td>逆置、连续删除、归并、倒数k、判环可以独立写</td></tr><tr><td>栈队列</td><td>能说明每个指针含义及空满条件，能追踪回绕</td></tr><tr><td>数组矩阵</td><td>能从行长度求和推压缩下标</td></tr><tr><td>KMP</td><td>能手算pi，说明失配时j为何回退到pi[j-1]</td></tr><tr><td>二叉树</td><td>递归、显式栈、层序互相转换，区分高度和深度</td></tr><tr><td>线索与森林</td><td>先看tag再走指针，认清兄弟与孩子</td></tr><tr><td>图</td><td>先确认有向/无向、带权/无权、负边、连通与DAG</td></tr><tr><td>查找树</td><td>BST删除三种情形，AVL四旋转，红黑/B树操作规则</td></tr><tr><td>散列</td><td>成功/失败探测轨迹、墓碑与装填因子</td></tr><tr><td>排序</td><td>稳定性反例、一趟结果、复杂度与空间条件</td></tr><tr><td>综合题</td><td>先写前提和不变量，再写代码，最后分析边界</td></tr></tbody></table></div></article><article class="topic" id="s09-2"><h3>09.2 源码包与可运行性</h3><p>源码包包括 <code>common.h</code> 和 <code>01_linear.c</code> 到 <code>08_exercises.c</code>，每个 .c 都是独立程序，不能把多个含 main 的文件一次链接成一个程序。头文件与源文件放在同一文件夹。</p><p>若以后想运行，GCC/Clang 示例：<code>gcc -std=c11 -O2 01_linear.c -o linear</code>，再执行生成的程序。Windows 的 Visual Studio 开发者终端可使用：<code>cl /std:c11 /utf-8 /W4 01_linear.c</code>，再运行 <code>01_linear.exe</code>。这些步骤是可选的，直接阅读 Notebook/HTML 不需要编译器。</p><p>每章 main 包含断言自测和一条结果提示；通过时打印 <code>PASS</code>。自测覆盖常规和部分边界输入，并对排序、字符串匹配、图算法做交叉验证。实际执行环境、结果和测试范围写在源码包的 <code>验证说明.md</code>。测试不能证明全部输入正确；证明依靠前提、不变量和推导，示例容量与整数范围约定仍然适用。</p></article><article class="topic" id="s09-3"><h3>09.3 覆盖深度与边界</h3><p>提供完整教学实现的部分：顺序表/链表核心操作、栈与队列、后缀表达式求值、压缩下标及快速转置、BF/KMP、树遍历与应用、线索化、Huffman、图存储与遍历、并查集、Prim/Kruskal、Dijkstra/Floyd、拓扑与关键时间、顺序/折半/分块、BST、AVL插删、散列、主要内部排序、综合题答案。</p><p>提供规则与过程讲解而未给完整维护程序的部分：静态链表、十字链表/邻接多重表、中缀表达式解析与转换、红黑树插删、B/B+树分裂合并、外部排序的真实文件I/O、置换选择和败者树维护。B/B+树另有可编译的查找函数，外部归并另有内存模拟。这样可以明确“已给完整代码”和“需要掌握规则”的区别，不把片段包装成完整系统。</p></article><article class="topic" id="s09-4"><h3>09.4 查阅资料</h3><p>本材料的讲解、例题、练习与 C 实现为重新编写，未复制教材正文或现成代码。以下是用于核对算法定义和适用条件的公开课程资料；它们不是 408 官方考试大纲。</p><ul><li><a href="https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/lecture-notes/" target="_blank" rel="noopener">MIT 6.006：课程讲义目录</a>：查阅排序、散列、AVL、堆、BFS/DFS和最短路课程主题。</li><li><a href="https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/mit6_006s20_lec7/" target="_blank" rel="noopener">MIT：AVL 讲义</a>：对应06.4的平衡与旋转规则。</li><li><a href="https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/mit6_006s20_lec9/" target="_blank" rel="noopener">MIT：BFS 讲义</a>：对应05.3的无权最短路。</li><li><a href="https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/resources/mit6_006s20_lec13/" target="_blank" rel="noopener">MIT：Dijkstra 讲义</a>：对应05.5的非负权前提与贪心选择。</li><li><a href="https://opendsa-server.cs.vt.edu/embed" target="_blank" rel="noopener">Virginia Tech OpenDSA：课程模块索引</a>：可进一步查看模式匹配、排序、图与并查集的交互演示。</li></ul><p>对具体考试年份的范围和术语，以当年正式大纲、指定教材及题目给出的定义为准。本材料适合作为代码复习笔记，不能替代全部概念题、手算题与真题训练。</p></article></section><footer>408 数据结构 C 代码复习笔记 · 代码与练习原创编写 · 未指定考试年份 · 公开课程参考链接见 09.4。</footer></main><a href="#top" class="top-link">回到顶部 ↑</a>
+<script>
+const search=document.querySelector('#search');const topics=[...document.querySelectorAll('.topic')];const chapters=[...document.querySelectorAll('.chapter')];const allDetails=[...document.querySelectorAll('details')];const originalDetails=allDetails.map(d=>d.open);const total=67;
+const hay=topics.map(t=>t.textContent.toLocaleLowerCase());
+function filter(){const q=search.value.trim().toLocaleLowerCase();let count=0;topics.forEach((t,i)=>{t.hidden=q&&!hay[i].includes(q);if(!t.hidden)count++;});chapters.forEach(c=>{c.hidden=![...c.querySelectorAll('.topic')].some(t=>!t.hidden);});document.querySelector('.hero').hidden=!!q;document.querySelector('#no-results').hidden=count!==0;document.querySelector('#search-status').textContent=q?'匹配 '+count+' / '+total+' 个小节':total+' 个小节，可搜索正文与代码';allDetails.forEach((d,i)=>{d.open=q?true:originalDetails[i]});}
+search.addEventListener('input',filter);search.addEventListener('keydown',e=>{if(e.key==='Escape'){search.value='';filter();}});
+document.addEventListener('click',async e=>{const b=e.target.closest('.copy');if(!b)return;const code=document.getElementById(b.dataset.code).textContent;try{await navigator.clipboard.writeText(code);b.textContent='已复制';}catch{const t=document.createElement('textarea');t.value=code;t.style.position='fixed';t.style.left='-9999px';document.body.append(t);t.select();const ok=document.execCommand('copy');t.remove();b.textContent=ok?'已复制':'请选中代码复制';}setTimeout(()=>b.textContent='复制代码',1600);});
+let savedOpen=[];window.addEventListener('beforeprint',()=>{savedOpen=allDetails.map(d=>d.open);allDetails.forEach(d=>d.open=true);});window.addEventListener('afterprint',()=>allDetails.forEach((d,i)=>d.open=savedOpen[i]));document.querySelector('#print').addEventListener('click',()=>{search.value='';filter();window.print();});
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.nav-link').forEach(a=>a.classList.toggle('active',a.hash==='#'+e.target.id));}});},{rootMargin:'-5% 0px -80% 0px',threshold:0});chapters.forEach(c=>observer.observe(c));
+</script></body></html>
